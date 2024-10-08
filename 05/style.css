@@ -1,0 +1,32 @@
+:root {
+    --blue: #1e90ff;
+    --container-width: 1200px;
+}
+
+body {
+    margin: 0;
+    font-family: "Oswald", sans-serif;
+}
+
+header {
+    background-color: var(--blue);
+    padding: 30px 20px;
+}
+
+header nav {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 30px;
+    transition: color 0.4s;
+}
+
+header nav a:hover {
+    color: lightcoral;
+}
