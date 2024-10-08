@@ -1,6 +1,8 @@
 :root {
     --blue: #1e90ff;
     --container-width: 1200px;
+    --trans: all 0.4s;
+    --rabbit-color: #fbf022;
 }
 
 body {
@@ -17,6 +19,19 @@ header nav {
     width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
+    position: relative;
+
+    box-sizing: border-box;
+    padding: 0 20px 0 100px;
+
+}
+
+header nav svg {
+    width: 90px;
+    fill: white;
+    position: absolute;
+    top: -23px;
+    left: 0;
 }
 
 header nav a {
@@ -24,9 +39,9 @@ header nav a {
     text-decoration: none;
     margin-right: 20px;
     font-size: 30px;
-    transition: color 0.4s;
+    transition: var(--trans);
 }
 
 header nav a:hover {
-    color: lightcoral;
+    color: var(--rabbit-color);
 }
