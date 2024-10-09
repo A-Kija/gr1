@@ -65,19 +65,33 @@ header nav a:hover {
     left: 0;
 }
 
-.hero-text h1 {
-    font-size: 60px;
-    color: var(--blue);
+.hero-text-holder {
+    width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 20px;
+    box-sizing: border-box;
+}
+
+.hero-text-bg {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    border-radius: 40px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.hero-text h1 {
+    font-size: 60px;
+    color: var(--blue);
+    margin: 0;
+    max-width: 600px;
 }
 
 .hero-text p {
     font-weight: 200;
     font-size: 20px;
     color: white;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 600px;
+    
 }
