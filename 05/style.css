@@ -20,7 +20,6 @@ header nav {
     max-width: var(--container-width);
     margin: 0 auto;
     position: relative;
-
     box-sizing: border-box;
     padding: 0 20px 0 100px;
 
@@ -39,9 +38,21 @@ header nav a {
     text-decoration: none;
     margin-right: 20px;
     font-size: 30px;
+    line-height: 1.5;
     transition: var(--trans);
 }
 
 header nav a:hover {
     color: var(--rabbit-color);
+}
+
+.hero {
+    width: 100%;
+    height: calc(100vh - 105px);
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+
 }
