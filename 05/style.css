@@ -22,7 +22,6 @@ header nav {
     position: relative;
     box-sizing: border-box;
     padding: 0 20px 0 100px;
-
 }
 
 header nav svg {
@@ -49,10 +48,36 @@ header nav a:hover {
 .hero {
     width: 100%;
     height: calc(100vh - 105px);
+    position: relative;
+    font-size: 0;
 }
 
 .hero img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+}
 
+.hero-text {
+    width: 100%;
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+}
+
+.hero-text h1 {
+    font-size: 60px;
+    color: var(--blue);
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero-text p {
+    font-weight: 200;
+    font-size: 20px;
+    color: white;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 20px;
 }
