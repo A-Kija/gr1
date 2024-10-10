@@ -5,6 +5,10 @@
     --rabbit-color: #fbf022;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: "Oswald", sans-serif;
@@ -124,3 +128,28 @@ header nav a:hover {
     max-width: 600px;
     
 }
+
+.stats {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.stats-bin {
+    height: 500px;
+    width: 100%;
+    max-width: var(--container-width);
+    display: flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    
+}
+
+.stats h4 {
+    font-size: 60px;
+    color: var(--blue);
+    margin: 0;
+}
+
+
