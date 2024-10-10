@@ -137,19 +137,49 @@ header nav a:hover {
 }
 
 .stats-bin {
-    height: 500px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     width: 100%;
     max-width: var(--container-width);
     display: flex;
     padding: 0 30px;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 30px;
+    row-gap: 50px;
+    flex-wrap: wrap;
     
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+    width: 100%;
+    max-width: 280px;
+    min-width: 230px;
 }
 
 .stats h4 {
     font-size: 60px;
     color: var(--blue);
     margin: 0;
+}
+
+.stat p {
+    font-size: 20px;
+    color: gray;
+    margin: 0;
+    text-align: center;
+}
+
+
+.box-content-left svg {
+    width: 100px;
+    height: 100px;
 }
 
 
