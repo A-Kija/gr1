@@ -319,3 +319,110 @@ header nav a:hover {
 }
 
 
+
+.slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 200px;
+}
+
+.slider .slider-bin {
+    width: 100%;
+    max-width: var(--container-width);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.slider .slider-bin input {
+    display: none;
+}
+
+.slider .slider-bin .slider-controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+    column-gap: 10px;
+}
+
+.slider .slider-bin .slider-controls label {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.slider .slider-bin .slider-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider .slider-bin .slider-wrapper .slider-container {
+    width: 400%;
+    display: flex;
+    transform: translateX(-75%);
+    transition: all 0.8s cubic-bezier(.45,.04,.03,1.27);
+}
+
+.slider .slider-bin .slider-wrapper .slider-container .slide {
+    width: 100%;
+    display: flex;
+    max-height: 300px;
+    padding: 30px;
+    background-color: var(--blue);
+    border-radius: 40px;
+    column-gap: 60px;
+    color: white;
+}
+
+.slider .slider-bin .slider-wrapper .slider-container .slide .slide-left {
+    width: 80%;
+}
+
+.slider .slider-bin .slider-wrapper .slider-container .slide .slide-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+#slide1:checked + input + input + input + .slider-wrapper .slider-container {
+    transform: translateX(0);
+}
+
+#slide2:checked + input + input + .slider-wrapper .slider-container {
+    transform: translateX(-25%);
+}
+
+#slide3:checked + input + .slider-wrapper .slider-container {
+    transform: translateX(-50%);
+}
+
+#slide4:checked + .slider-wrapper .slider-container {
+    transform: translateX(-75%);
+}
+
+
+#slide1:checked + input + input + input + .slider-wrapper + .slider-controls label:nth-child(1) {
+    background-color: var(--blue);
+}
+
+#slide2:checked + input + input + .slider-wrapper + .slider-controls label:nth-child(2) {
+    background-color: var(--blue);
+}
+
+#slide3:checked + input + .slider-wrapper + .slider-controls label:nth-child(3) {
+    background-color: var(--blue);
+}
+
+#slide4:checked + .slider-wrapper + .slider-controls label:nth-child(4) {
+    background-color: var(--blue);
+}
+
+
+
+
