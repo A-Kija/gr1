@@ -371,7 +371,7 @@ header nav a:hover {
 .slider .slider-bin .slider-wrapper .slider-container .slide {
     width: 100%;
     display: flex;
-    max-height: 300px;
+    max-height: 500px;
     padding: 30px;
     background-color: var(--blue);
     border-radius: 40px;
@@ -381,6 +381,10 @@ header nav a:hover {
 
 .slider .slider-bin .slider-wrapper .slider-container .slide .slide-left {
     width: 80%;
+}
+
+.slider .slider-bin .slider-wrapper .slider-container .slide .slide-right {
+    width: 20%;
 }
 
 .slider .slider-bin .slider-wrapper .slider-container .slide .slide-left img {
