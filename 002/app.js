@@ -80,6 +80,31 @@ else if (Z == X) {
     }
 }
 
+
+// Refactored
+if (Z == X && X == Y) {
+    console.log('Z, X ir Y lygus');
+} else if (Z >= X && Z >= Y) {
+    if (Z == X) {
+        console.log('Z ir X didziausi');
+    } else if (Z == Y) {
+        console.log('Z ir Y didziausi');
+    } else {
+        console.log('Z didziausas');
+    }
+} else if (X >= Z && X >= Y) {
+    if (X == Y) {
+        console.log('X ir Y didziausi');
+    } else {
+        console.log('X didziausas');
+    }
+} else {
+    console.log('Y didziausas');
+}
+
+
+
+
 if (1 === '1') {
     console.log('Lygu');
 } else {
