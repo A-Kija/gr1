@@ -364,7 +364,7 @@ header nav a:hover {
 .slider .slider-bin .slider-wrapper .slider-container {
     width: 400%;
     display: flex;
-    transform: translateX(-75%);
+    transform: translateX(0);
     transition: all 0.8s cubic-bezier(.45,.04,.03,1.27);
 }
 
