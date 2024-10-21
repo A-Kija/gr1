@@ -40,15 +40,15 @@ if (B > A) {
 
 
 
-// const Z = rand(1, 100);
-// const X = rand(1, 100);
-// const Y = rand(1, 100);
+const Z = rand(1, 10);
+const X = rand(1, 10);
+const Y = rand(1, 10);
 
 // 
 
-const Z = 200;
-const X = 200;
-const Y = 200;
+// const Z = 200;
+// const X = 200;
+// const Y = 200;
 
 console.log('Z:', Z, 'X:', X, 'Y:', Y);
 
