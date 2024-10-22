@@ -1,0 +1,22 @@
+h2 {
+    letter-spacing: 15px;
+}
+
+#s2 {
+    display: flex;
+    column-gap: 10px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+#s2 div {
+    width: 100px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
