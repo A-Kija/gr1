@@ -29,7 +29,7 @@ let C = [
     }
 ];
 
-const cartRender = _ => {
+const cartRender = () => {
     let cartHtml = '';
     C.forEach(item => {
         const { id, img, title, price, quantity } = item;
