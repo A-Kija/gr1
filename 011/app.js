@@ -143,7 +143,7 @@ mas1.pop();
 
 mas1.shift();
 
-mas1WO3 = mas1.filter(el => el != 3);
+const mas1WO3 = mas1.filter(el => el != 3);
 
 
 console.log(mas1WO3);
