@@ -6,9 +6,11 @@ document.querySelector('#btn1').addEventListener('dblclick', e => {
     console.log('Button 1 dbclicked');
 });
 
-document.querySelector('#btn2').addEventListener('click', e => {
-    console.log('Button 2 clicked');
-});
+for (let i = 0; i < 10; i++) {
+    document.querySelector('#btn2').addEventListener('click', e => {
+        console.log('Button 2 clicked');
+    });
+}
 
 window.addEventListener('scroll', e => {
     console.log('Scrolling', window.scrollY);
@@ -25,5 +27,9 @@ document.querySelector('#btn3').addEventListener('click', e => {
 
 document.querySelector('.tevas').addEventListener('click', e => {
     document.querySelector('.tevas').style.backgroundColor = 'darkred';
+});
 
+document.querySelector('.vaikas').addEventListener('click', e => {
+    e.stopPropagation();
+    // document.querySelector('.vaikas').style.backgroundColor = 'darkblue';
 });

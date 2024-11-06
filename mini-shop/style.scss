@@ -124,3 +124,36 @@ header {
         }
     }
 }
+
+.hero {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        max-width: $xl;
+        padding: 50px 20px;
+        .hero-products {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap;
+            .product {
+                flex: 1;
+                min-width: 300px;
+                max-width: 400px;
+                
+                img {
+                    width: 100%;
+                    height: 300px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+    }
+}
