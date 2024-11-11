@@ -17,11 +17,21 @@ $white: #FFFFFF;
 }
 
 body {
-  font-family: $josefin;
-  margin: 0;
+    font-family: $josefin;
+    margin: 0;
 }
 
-ul, li, p, h1, h2, h3, h4, h5, h6, a, button {
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+button {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -31,6 +41,7 @@ header {
     display: flex;
     width: 100%;
     justify-content: center;
+
     .container {
         display: flex;
         justify-content: space-between;
@@ -40,11 +51,14 @@ header {
         background-color: $bg;
         padding: 0 20px;
         height: 100px;
+
         nav {
             padding: 10px;
+
             ul {
                 display: flex;
                 column-gap: 30px;
+
                 li {
                     a {
                         color: $blue;
@@ -55,9 +69,11 @@ header {
                         letter-spacing: 3px;
                         border-bottom: 1px solid transparent;
                         transition: all 0.3s ease;
+
                         &.in-use {
                             color: $red;
                         }
+
                         &:hover {
                             border-bottom: 1px solid $red;
                         }
@@ -65,46 +81,60 @@ header {
                 }
             }
         }
+
         .cart {
             position: relative;
+
             svg {
                 width: 40px;
                 height: 40px;
+                cursor: pointer;
             }
+
             .list {
                 position: absolute;
                 top: 50px;
                 right: -20px;
                 background-color: $white;
                 border: 3px solid $bg;
-                padding: 10px;
                 z-index: 1;
+                max-height: 0;
+                overflow: hidden;
+                transition: all 0.3s;
+
                 ul {
                     width: 320px;
+                    padding: 10px;
+
                     li {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
                         margin-bottom: 10px;
+
                         img {
                             width: 50px;
                             height: 50px;
                         }
+
                         .info {
                             display: flex;
                             align-items: center;
                             column-gap: 5px;
+
                             h3 {
                                 font-size: 18px;
                                 color: $blue;
                                 font-weight: 500;
                             }
+
                             p {
                                 font-size: 15px;
                                 color: $black;
                                 font-weight: 300;
                             }
                         }
+
                         button {
                             background-color: $red;
                             height: 30px;
@@ -114,6 +144,7 @@ header {
                             border-radius: 5px;
                             cursor: pointer;
                             transition: all 0.3s ease;
+
                             &:hover {
                                 background-color: $yellow;
                             }
@@ -129,6 +160,7 @@ header {
     display: flex;
     width: 100%;
     justify-content: center;
+
     .container {
         display: flex;
         justify-content: space-between;
@@ -137,20 +169,55 @@ header {
         width: 100%;
         max-width: $xl;
         padding: 50px 20px;
+
         .hero-products {
             display: flex;
             justify-content: space-between;
             width: 100%;
             flex-wrap: wrap;
+            column-gap: 40px;
+
             .product {
                 flex: 1;
                 min-width: 300px;
                 max-width: 400px;
-                
-                img {
+                display: flex;
+                flex-direction: column;
+               
+
+                .product-image {
                     width: 100%;
                     height: 300px;
-                    object-fit: cover;
+
+                    img {
+                        width: auto;
+                        height: 100%
+                    }
+                }
+
+                p {
+                    font-size: 20px;
+                    color: $blue;
+                    font-weight: 500;
+                    margin: 10px 0;
+                }
+
+                .add {
+                    display: flex;
+                    justify-content: space-between;
+                    button {
+                        background-color: $red;
+                        color: $white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            background-color: $yellow;
+                        }
+                    }
                 }
             }
         }

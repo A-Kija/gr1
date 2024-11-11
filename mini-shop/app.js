@@ -29,6 +29,22 @@ let C = [
     }
 ];
 
+
+const cartIcon = document.querySelector('[data-cart-icon]');
+const cartList = document.querySelector('[data-cart-list]');
+
+cartIcon.addEventListener('click', _ => {
+    if (cartList.dataset.open === 'close') {
+        cartList.dataset.open = 'open';
+        cartList.style.maxHeight = cartList.scrollHeight + 'px';
+    } else {
+        cartList.dataset.open = 'close';
+        cartList.style.maxHeight = '0';
+    }
+});
+
+
+
 const cartRender = _ => {
     let cartHtml = '';
     C.forEach(item => {
@@ -46,11 +62,14 @@ const cartRender = _ => {
                         `;
         cartHtml += cartItemHtml;
     });
-    document.querySelector('#mini-cart ul').innerHTML = cartHtml;
+    if (!cartHtml) {
+        cartHtml = '<li data-empty>Krepšelis tuščias</li>';
+    }
+    document.querySelector('[data-cart-list] ul').innerHTML = cartHtml;
 }
 
 const addEvents = _ => {
-    document.querySelectorAll('#mini-cart ul li')
+    document.querySelectorAll('[data-cart-list] ul li:not([data-empty])')
     .forEach(li => {
         const button = li.querySelector('button');
         button.addEventListener('click', _ => {
