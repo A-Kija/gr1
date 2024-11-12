@@ -46,41 +46,54 @@
                 <h1>Mini Shop</h1>
                 <p>Buy the best products at the best prices</p>
             </div>
+            
+            <!-- Įsivaizduokit, kad šita dalis ateina iš serverio -->
+            
             <div class="hero-products">
-                <div class="product">
+                <div class="product" data-product>
                     <div class="product-image">
-                        <img src="./images/kede.jpg" alt="Product 1">
+                        <img src="./images/kede.jpg" alt="Kėdė">
                     </div>
-                    <h3>Product 1</h3>
+                    <h3>Kėdė</h3>
                     <p>$100</p>
                     <div class="add">
-                        <button data-id="1" data-name="Product 1" data-price="100">Add to Cart</button>
+                        <button data-id="1" data-name="Kėdė" data-price="100">Add to Cart</button>
                         <input type="number" value="1" min="1" max="10">
                     </div>
                 </div>
-                <div class="product">
+                <div class="product" data-product>
                     <div class="product-image">
-                        <img src="./images/stalas.jpg" alt="Product 2">
+                        <img src="./images/stalas.jpg" alt="Stalas">
                     </div>
-                    <h3>Product 2</h3>
+                    <h3>Stalas</h3>
                     <p>$200</p>
                     <div class="add">
-                        <button data-id="2" data-name="Product 2" data-price="200">Add to Cart</button>
+                        <button data-id="2" data-name="Stalas" data-price="200">Add to Cart</button>
                         <input type="number" value="1" min="1" max="10">
                     </div>
                 </div>
-                <div class="product">
+                <div class="product" data-product>
                     <div class="product-image">
-                        <img src="./images/sofa.jpg" alt="Product 3">
+                        <img src="./images/sofa.jpg" alt="Sofa">
                     </div>
-                    <h3>Product 3</h3>
+                    <h3>Sofa</h3>
                     <p>$300</p>
                     <div class="add">
-                        <button data-id="3" data-name="Product 3" data-price="300">Add to Cart</button>
+                        <button data-id="3" data-name="Sofa" data-price="300">Add to Cart</button>
                         <input type="number" value="1" min="1" max="10">
                     </div>
                 </div>
             </div>
+
+            <!-- iki čia -->
+
+
+        </div>
+    </section>
+
+    <section class="msg" data-show="false">
+        <div class="container">
+            <p>Product added to cart</p>
         </div>
     </section>
 
