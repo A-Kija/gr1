@@ -31,19 +31,33 @@
 
 let C = [];
 
+const init = _ => {
+    const cartIcon = document.querySelector('[data-cart-icon]');
+    cartIcon.addEventListener('click', _ => changeCart());
+    cartRender();
+    addEvents();
+    productsAction();
+}
 
-const cartIcon = document.querySelector('[data-cart-icon]');
-const cartList = document.querySelector('[data-cart-list]');
+const changeCart = (changeView = true) => {
+    const cartList = document.querySelector('[data-cart-list]');
 
-cartIcon.addEventListener('click', _ => {
-    if (cartList.dataset.open === 'close') {
-        cartList.dataset.open = 'open';
-        cartList.style.maxHeight = cartList.scrollHeight + 'px';
+    if (changeView) {
+        if (cartList.dataset.open === 'close') {
+            cartList.dataset.open = 'open';
+            cartList.style.maxHeight = cartList.scrollHeight + 'px';
+        } else {
+            cartList.dataset.open = 'close';
+            cartList.style.maxHeight = '0';
+        }
     } else {
-        cartList.dataset.open = 'close';
-        cartList.style.maxHeight = '0';
+        if (cartList.dataset.open === 'close') {
+            cartList.style.maxHeight = '0';
+        } else {
+            cartList.style.maxHeight = cartList.scrollHeight + 'px';
+        }
     }
-});
+}
 
 const showMessage = _ => {
     const message = document.querySelector('[data-show]');
@@ -69,29 +83,28 @@ const productsAction = _ => {
             const price = parseFloat(button.dataset.price);
             const quantity = parseInt(input.value);
 
-            C.push(
-                {
-                    id,
-                    img,
-                    title: name,
-                    price,
-                    quantity
-                }
-            );
+            const findItem = C.find(item => item.id === id);
+            if (findItem) {
+                findItem.quantity += quantity;
+            } else {
+                C.push(
+                    {
+                        id,
+                        img,
+                        title: name,
+                        price,
+                        quantity
+                    }
+                );
+            }
 
             showMessage();
             cartRender();
             addEvents();
-            const cartList = document.querySelector('[data-cart-list]');
-            cartList.dataset.open = 'close';
-            cartList.style.maxHeight = '0';
-
+            changeCart(false);
 
         });
     });
-
-
-
 }
 
 
@@ -132,9 +145,9 @@ const addEvents = _ => {
         });
 }
 
-cartRender();
-addEvents();
-productsAction();
+
+
+init();
 
 
 
