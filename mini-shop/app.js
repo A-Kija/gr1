@@ -29,6 +29,14 @@
 //     }
 // ];
 
+// bandymas su local storage
+
+const obj = {name: 'Jonas', age: 25};
+
+localStorage.setItem('cat', JSON.stringify(obj));
+localStorage.setItem('dog', JSON.stringify(obj));
+
+
 let C = [];
 
 const init = _ => {
@@ -37,6 +45,11 @@ const init = _ => {
     cartRender();
     addEvents();
     productsAction();
+}
+
+const updateCount = _ => {
+    const count = C.reduce((acc, item) => acc + item.quantity, 0);
+    document.querySelector('[data-cart-count]').textContent = count;
 }
 
 const changeCart = (changeView = true) => {
@@ -127,13 +140,18 @@ const cartRender = _ => {
         cartHtml += cartItemHtml;
     });
     if (!cartHtml) {
-        cartHtml = '<li data-empty>Krepšelis tuščias</li>';
+        cartHtml = '<li data-not-product>Krepšelis tuščias</li>';
+    } else {
+        const total = C.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        cartHtml += `<li data-not-product>Total:  ${total.toFixed(2)} EUR</li>`;
     }
+
     document.querySelector('[data-cart-list] ul').innerHTML = cartHtml;
+    updateCount();
 }
 
 const addEvents = _ => {
-    document.querySelectorAll('[data-cart-list] ul li:not([data-empty])')
+    document.querySelectorAll('[data-cart-list] ul li:not([data-not-product])')
         .forEach(li => {
             const button = li.querySelector('button');
             button.addEventListener('click', _ => {

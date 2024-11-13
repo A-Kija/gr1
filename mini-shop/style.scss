@@ -243,7 +243,8 @@ header {
     position: fixed;
     right: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(100%, -50%);
+    transition: all 0.3s ease;
     .container {
         display: flex;
         justify-content: center;
@@ -254,8 +255,7 @@ header {
         border-bottom-left-radius: 40px;
         padding: 100px 100px 100px 50px;
         background-color: $white;
-        transform: translate(100%, 0);
-        transition: all 0.3s ease;
+
         p {
             font-size: 30px;
             color: $blue;
@@ -264,8 +264,6 @@ header {
     }
 
     &[data-show="true"] {
-        .container {
-            transform: translate(0, 0);
-        }
+        transform: translate(0, -50%);
     }
 }
