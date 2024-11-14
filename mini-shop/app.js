@@ -1,45 +1,9 @@
-// let C = [
-//     {
-//         id: 1,
-//         img: './images/kede.jpg',
-//         title: 'Kedė',
-//         price: 50,
-//         quantity: 4
-//     },
-//     {
-//         id: 2,
-//         img: './images/stalas.jpg',
-//         title: 'Stalas',
-//         price: 100,
-//         quantity: 2
-//     },
-//     {
-//         id: 3,
-//         img: './images/sofa.jpg',
-//         title: 'Sofa',
-//         price: 200,
-//         quantity: 3
-//     },
-//     {
-//         id: 4,
-//         img: './images/komoda.jpg',
-//         title: 'Komoda',
-//         price: 150,
-//         quantity: 1
-//     }
-// ];
-
-// bandymas su local storage
-
-const obj = {name: 'Jonas', age: 25};
-
-localStorage.setItem('cat', JSON.stringify(obj));
-localStorage.setItem('dog', JSON.stringify(obj));
-
-
-let C = [];
+let C;
 
 const init = _ => {
+
+    C = JSON.parse(localStorage.getItem('cart')) ?? [];
+
     const cartIcon = document.querySelector('[data-cart-icon]');
     cartIcon.addEventListener('click', _ => changeCart());
     cartRender();
@@ -50,6 +14,7 @@ const init = _ => {
 const updateCount = _ => {
     const count = C.reduce((acc, item) => acc + item.quantity, 0);
     document.querySelector('[data-cart-count]').textContent = count;
+    localStorage.setItem('cart', JSON.stringify(C));
 }
 
 const changeCart = (changeView = true) => {
