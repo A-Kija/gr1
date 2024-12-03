@@ -1,13 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create</title>
-</head>
-<body>
-    
-    <h1>{{manoKintamasis}}</h1>
-    
-</body>
-</html>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="card mt-5">
+                <h2 class="card-header">Nauja knyga</h2>
+                <div class="card-body">
+                    <h5 class="card-title">Pridėkite naują knygą</h5>
+                    <form action="{{domain}}store" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Pavadinimas</label>
+                            <input type="text" class="form-control" name="title">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Autorius</label>
+                            <input type="text" class="form-control" name="author">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Leidimo metai</label>
+                            <input type="text" class="form-control" name="year">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Žanras</label>
+                            <input type="text" class="form-control" name="genre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ISBN</label>
+                            <input type="text" class="form-control" name="isbn">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Puslapiai</label>
+                            <input type="text" class="form-control" name="pages">
+                        </div>
+                    </form>
+                    <button type="submit" class="btn btn-outline-primary">Pridėti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
