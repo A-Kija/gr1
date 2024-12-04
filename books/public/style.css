@@ -11965,3 +11965,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body {
+  background-color: #c1c1cc;
+}
