@@ -11965,6 +11965,29 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.list-group-item.books {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-group-item.books .book {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  font-size: 17px;
+}
+.list-group-item.books .book .title {
+  font-weight: bold;
+}
+.list-group-item.books .book .author {
+  font-style: italic;
+}
+
 body {
   background-color: #c1c1cc;
+}
+
+nav {
+  background-color: #97b7d7;
 }

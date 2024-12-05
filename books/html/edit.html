@@ -2,35 +2,35 @@
     <div class="row justify-content-center">
         <div class="col-7">
             <div class="card mt-5">
-                <h2 class="card-header">Nauja knyga</h2>
+                <h2 class="card-header">Redaguoti knygą</h2>
                 <div class="card-body">
-                    <h5 class="card-title">Pridėkite naują knygą</h5>
-                    <form action="{{domain}}store" method="post">
+                    <h5 class="card-title">Redaguokite knygą "{{title}}"</h5>
+                    <form action="{{domain}}update/{{id}}" method="post">
                         <div class="mb-3">
                             <label class="form-label">Pavadinimas</label>
-                            <input type="text" class="form-control" name="title">
+                            <input type="text" class="form-control" name="title" value="{{title}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autorius</label>
-                            <input type="text" class="form-control" name="author">
+                            <input type="text" class="form-control" name="author" value="{{author}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Leidimo metai</label>
-                            <input type="text" class="form-control" name="year">
+                            <input type="text" class="form-control" name="year" value="{{year}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Žanras</label>
-                            <input type="text" class="form-control" name="genre">
+                            <input type="text" class="form-control" name="genre" value="{{genre}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" class="form-control" name="isbn">
+                            <input type="text" class="form-control" name="isbn" value="{{isbn}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Puslapiai</label>
-                            <input type="text" class="form-control" name="pages">
+                            <input type="text" class="form-control" name="pages" value="{{pages}}">
                         </div>
-                        <button type="submit" class="btn btn-outline-primary">Pridėti</button>
+                        <button type="submit" class="btn btn-outline-primary">Išsaugoti</button>
                         <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>
                     </form>
                 </div>

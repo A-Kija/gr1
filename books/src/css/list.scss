@@ -1,0 +1,18 @@
+.list-group-item.books {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .book {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        font-size: 17px;
+        .title {
+            font-weight: bold;
+        }
+        .author {
+            font-style: italic;
+        }
+       
+    }
+}
