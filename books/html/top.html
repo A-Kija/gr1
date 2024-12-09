@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{domain}}style.css">
+    <script src="{{domain}}app.js" defer></script>
     <title>{{pageTitle}}</title>
 </head>
 <body>
@@ -15,4 +16,12 @@
             </ul>
         </nav>
     </header>
-    <div class="alert alert-{{message.type}}">{{message.msg}}</div>
+    {{#if message}}
+    <div class="container" data-msg-container>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="alert alert-{{message.type}} mt-5">{{message.msg}}</div>
+            </div>
+        </div>
+    </div>
+    {{/if}}

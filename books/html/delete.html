@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <div class="card mt-5">
+                <h2 class="card-header">Ar tikrai norite ištrinti knygą {{title}}</h2>
+                <div class="card-body">
+                    <form action="{{domain}}destroy/{{id}}" method="post">
+                        <button type="submit" class="btn btn-outline-danger">Ištrinti</button>
+                        <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
