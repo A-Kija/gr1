@@ -8,27 +8,27 @@
                     <form action="{{domain}}store" method="post">
                         <div class="mb-3">
                             <label class="form-label">Pavadinimas</label>
-                            <input type="text" class="form-control" name="title">
+                            <input type="text" class="form-control" name="title" value="{{#if oldData.title}}{{oldData.title}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autorius</label>
-                            <input type="text" class="form-control" name="author">
+                            <input type="text" class="form-control" name="author" value="{{#if oldData.author}}{{oldData.author}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Leidimo metai</label>
-                            <input type="text" class="form-control" name="year">
+                            <input type="text" class="form-control" name="year" value="{{#if oldData.year}}{{oldData.year}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Žanras</label>
-                            <input type="text" class="form-control" name="genre">
+                            <input type="text" class="form-control" name="genre"  value="{{#if oldData.genre}}{{oldData.genre}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" class="form-control" name="isbn">
+                            <input type="text" class="form-control" name="isbn" value="{{#if oldData.isbn}}{{oldData.isbn}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Puslapiai</label>
-                            <input type="text" class="form-control" name="pages">
+                            <input type="text" class="form-control" name="pages" value="{{#if oldData.pages}}{{oldData.pages}}{{/if}}">
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Pridėti</button>
                         <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>
