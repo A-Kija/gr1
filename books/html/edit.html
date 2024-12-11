@@ -8,27 +8,27 @@
                     <form action="{{domain}}update/{{id}}" method="post">
                         <div class="mb-3">
                             <label class="form-label">Pavadinimas</label>
-                            <input type="text" class="form-control" name="title" value="{{title}}">
+                            <input type="text" class="form-control" name="title" value="{{#if (isdefined oldData.title)}}{{oldData.title}}{{else}}{{title}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autorius</label>
-                            <input type="text" class="form-control" name="author" value="{{author}}">
+                            <input type="text" class="form-control" name="author" value="{{#if (isdefined oldData.author)}}{{oldData.author}}{{else}}{{author}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Leidimo metai</label>
-                            <input type="text" class="form-control" name="year" value="{{year}}">
+                            <input type="text" class="form-control" name="year" value="{{#if (isdefined oldData.year)}}{{oldData.year}}{{else}}{{year}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Žanras</label>
-                            <input type="text" class="form-control" name="genre" value="{{genre}}">
+                            <input type="text" class="form-control" name="genre" value="{{#if (isdefined oldData.genre)}}{{oldData.genre}}{{else}}{{genre}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" class="form-control" name="isbn" value="{{isbn}}">
+                            <input type="text" class="form-control" name="isbn" value="{{#if (isdefined oldData.isbn)}}{{oldData.isbn}}{{else}}{{isbn}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Puslapiai</label>
-                            <input type="text" class="form-control" name="pages" value="{{pages}}">
+                            <input type="text" class="form-control" name="pages" value="{{#if (isdefined oldData.pages)}}{{oldData.pages}}{{else}}{{pages}}{{/if}}">
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Išsaugoti</button>
                         <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>
