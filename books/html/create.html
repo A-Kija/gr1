@@ -5,30 +5,43 @@
                 <h2 class="card-header">Nauja knyga</h2>
                 <div class="card-body">
                     <h5 class="card-title">Pridėkite naują knygą</h5>
-                    <form action="{{domain}}store" method="post">
+                    <form action="{{domain}}store" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label">Pavadinimas</label>
-                            <input type="text" class="form-control" name="title" value="{{#if oldData.title}}{{oldData.title}}{{/if}}">
+                            <input type="text" class="form-control" name="title"
+                                value="{{#if oldData.title}}{{oldData.title}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autorius</label>
-                            <input type="text" class="form-control" name="author" value="{{#if oldData.author}}{{oldData.author}}{{/if}}">
+                            <input type="text" class="form-control" name="author"
+                                value="{{#if oldData.author}}{{oldData.author}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Leidimo metai</label>
-                            <input type="text" class="form-control" name="year" value="{{#if oldData.year}}{{oldData.year}}{{/if}}">
+                            <input type="text" class="form-control" name="year"
+                                value="{{#if oldData.year}}{{oldData.year}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Žanras</label>
-                            <input type="text" class="form-control" name="genre"  value="{{#if oldData.genre}}{{oldData.genre}}{{/if}}">
+                            <input type="text" class="form-control" name="genre"
+                                value="{{#if oldData.genre}}{{oldData.genre}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" class="form-control" name="isbn" value="{{#if oldData.isbn}}{{oldData.isbn}}{{/if}}">
+                            <input type="text" class="form-control" name="isbn"
+                                value="{{#if oldData.isbn}}{{oldData.isbn}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Puslapiai</label>
-                            <input type="text" class="form-control" name="pages" value="{{#if oldData.pages}}{{oldData.pages}}{{/if}}">
+                            <input type="text" class="form-control" name="pages"
+                                value="{{#if oldData.pages}}{{oldData.pages}}{{/if}}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Viršelio nuotrauka</label>
+                            <div class="input-group">
+                                <input type="file" name="cover" class="form-control" id="inputGroupFile02">
+                                <label class="input-group-text" for="inputGroupFile02">Įkelti</label>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Pridėti</button>
                         <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>

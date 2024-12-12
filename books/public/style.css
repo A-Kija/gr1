@@ -11999,3 +11999,12 @@ nav {
 .mid {
   font-size: 40px;
 }
+
+.card-body form.sort {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 40px 0;
+}
+.card-body form.sort select {
+  width: 300px;
+}

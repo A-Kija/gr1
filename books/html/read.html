@@ -4,7 +4,19 @@
             <div class="card mt-5">
                 <h2 class="card-header">Knygų sąrašas</h2>
                 <div class="card-body">
-                    <h5 class="card-title"></h5>
+                    <h5 class="card-title">Rūšiavimas:</h5>
+                    <form class="sort" action="{{domain}}" method="get">
+                        <select class="form-select" name="sort">
+                            <option value="default" {{#if (isdefined sortBy.default)}} selected {{/if}}>Nerūšiuoti</option>
+                            <option value="title_az" {{#if (isdefined sortBy.title_az)}} selected {{/if}}>Pavadinimas A-Z</option>
+                            <option value="title_za" {{#if (isdefined sortBy.title_za)}} selected {{/if}}>Pavadinimas Z-A</option>
+                            <option value="author_az" {{#if (isdefined sortBy.author_az)}} selected {{/if}}>Autorius A-Z</option>
+                            <!-- option value="author_az" selected >Autorius A-Z</option> -->
+                            <option value="author_za" {{#if (isdefined sortBy.author_za)}} selected {{/if}}>Autorius Z-A</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-primary">Rūšiuoti</button>
+                        <a href="{{domain}}" class="btn btn-outline-success">Atšaukti</a>
+                    </form>
                     <ul class="list-group">
                         {{#books}}
                         <li class="list-group-item books">
@@ -16,7 +28,7 @@
                                 <a href="{{domain}}show/{{id}}" class="btn btn-outline-primary">Peržiūrėti</a>
                                 <a href="{{domain}}edit/{{id}}" class="btn btn-outline-secondary">Redaguoti</a>
                                 <a href="{{domain}}delete/{{id}}" class="btn btn-outline-danger">Ištrinti</a>
-                            </div> 
+                            </div>
                         </li>
                         {{/books}}
                     </ul>
