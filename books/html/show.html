@@ -28,6 +28,16 @@
                         <label class="form-label">Puslapiai:</label>
                         <div>{{pages}}</div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Viršelio nuotrauka:</label>
+                        <div class="show-cover">
+                            {{#if cover}}
+                            <img src="{{domain}}images/{{cover}}" alt="{{title}}">
+                            {{else}}
+                            <img src="{{domain}}images/no-image.png" alt="{{title}}">
+                            {{/if}}
+                        </div>
+                    </div>
                     <a href="{{domain}}" class="btn btn-outline-secondary">Atgal</a>
                 </div>
             </div>

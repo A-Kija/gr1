@@ -11983,6 +11983,18 @@ textarea.form-control-lg {
 .list-group-item.books .book .author {
   font-style: italic;
 }
+.list-group-item.books .book .cover {
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.list-group-item.books .book .cover img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 body {
   background-color: #c1c1cc;
@@ -12007,4 +12019,31 @@ nav {
 }
 .card-body form.sort select {
   width: 300px;
+}
+
+.show-cover {
+  width: 300px;
+  height: 400px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.show-cover img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.edit-cover {
+  width: 100px;
+  height: 130px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-left: 30px;
+}
+.edit-cover img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }

@@ -8,27 +8,57 @@
                     <form action="{{domain}}update/{{id}}" method="post">
                         <div class="mb-3">
                             <label class="form-label">Pavadinimas</label>
-                            <input type="text" class="form-control" name="title" value="{{#if (isdefined oldData.title)}}{{oldData.title}}{{else}}{{title}}{{/if}}">
+                            <input type="text" class="form-control" name="title"
+                                value="{{#if (isdefined oldData.title)}}{{oldData.title}}{{else}}{{title}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autorius</label>
-                            <input type="text" class="form-control" name="author" value="{{#if (isdefined oldData.author)}}{{oldData.author}}{{else}}{{author}}{{/if}}">
+                            <input type="text" class="form-control" name="author"
+                                value="{{#if (isdefined oldData.author)}}{{oldData.author}}{{else}}{{author}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Leidimo metai</label>
-                            <input type="text" class="form-control" name="year" value="{{#if (isdefined oldData.year)}}{{oldData.year}}{{else}}{{year}}{{/if}}">
+                            <input type="text" class="form-control" name="year"
+                                value="{{#if (isdefined oldData.year)}}{{oldData.year}}{{else}}{{year}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Žanras</label>
-                            <input type="text" class="form-control" name="genre" value="{{#if (isdefined oldData.genre)}}{{oldData.genre}}{{else}}{{genre}}{{/if}}">
+                            <input type="text" class="form-control" name="genre"
+                                value="{{#if (isdefined oldData.genre)}}{{oldData.genre}}{{else}}{{genre}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" class="form-control" name="isbn" value="{{#if (isdefined oldData.isbn)}}{{oldData.isbn}}{{else}}{{isbn}}{{/if}}">
+                            <input type="text" class="form-control" name="isbn"
+                                value="{{#if (isdefined oldData.isbn)}}{{oldData.isbn}}{{else}}{{isbn}}{{/if}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Puslapiai</label>
-                            <input type="text" class="form-control" name="pages" value="{{#if (isdefined oldData.pages)}}{{oldData.pages}}{{else}}{{pages}}{{/if}}">
+                            <input type="text" class="form-control" name="pages"
+                                value="{{#if (isdefined oldData.pages)}}{{oldData.pages}}{{else}}{{pages}}{{/if}}">
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div>
+                                <label class="form-label">Viršelio nuotrauka</label>
+                                <div class="input-group">
+                                    <input type="file" name="cover" class="form-control" id="inputGroupFile02">
+                                    <label class="input-group-text" for="inputGroupFile02">Įkelti</label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="edit-cover">
+                                    {{#if cover}}
+                                    <img src="{{domain}}images/{{cover}}" alt="{{title}}">
+                                    {{else}}
+                                    <img src="{{domain}}images/no-image.png" alt="{{title}}">
+                                    {{/if}}
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="delete_cover" value="1" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Trinti nuotrauką
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Išsaugoti</button>
                         <a href="{{domain}}" class="btn btn-outline-secondary">Atšaukti</a>
