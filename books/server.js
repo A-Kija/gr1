@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const handlebars = require('handlebars');
 const multer = require('multer');
@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
 });
 
 
-
 const port = 80;
 const domain = 'http://books.final/';
 const top = fs.readFileSync('./html/top.html', 'utf8');
@@ -33,12 +32,23 @@ const messages = {
   create_success: { msg: 'Knyga sėkmingai sukurta!', type: 'success' },
   edit_success: { msg: 'Knyga sėkmingai atnaujinta!', type: 'success' },
   delete_success: { msg: 'Knyga sėkmingai ištrinta!', type: 'success' },
-  validation_error: { msg: 'Užpildykite visus laukus!', type: 'danger' }
+  validation_error: { msg: 'Užpildykite visus laukus!', type: 'danger' },
+  file_error: { msg: 'Netinkamas paveikslėlio formatas. Palaikomi formatai: jpeg, png', type: 'danger' }
 };
 
 // MIDDLEWARE
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      req.fileValidationError = true;
+    }
+  }
+});
 
 const sessionManager = (req, res, next) => {
   let sessionId = req.cookies.session || '';
@@ -70,9 +80,9 @@ const oldDataManager = (req, res, next) => {
 }
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+app.use(upload.single('cover'));
 app.use(sessionManager);
 app.use(oldDataManager);
 
@@ -152,7 +162,7 @@ app.get('/', (req, res) => {
     domain,
     books,
     message: getMessages(req),
-    sortBy: {[sortBy]: true}
+    sortBy: { [sortBy]: true }
   };
 
   /*
@@ -243,15 +253,24 @@ app.get('/delete/:id', (req, res) => {
   res.send(html);
 });
 
-app.post('/store', upload.single('cover'), (req, res) => {
+app.post('/store', (req, res) => {
   const { title, author, year, genre, isbn, pages } = req.body;
+  const uploadFileName = req.file?.filename; // req.file egzistuoja tik jei yra failas
   const id = uuidv4();
   if (!title || !author || !year || !genre || !isbn || !pages) {
+    if (uploadFileName) {
+      fs.existsSync(`public/images/${uploadFileName}`) &&
+        fs.unlinkSync(`public/images/${uploadFileName}`); // delete uploaded file
+    }
     addToSession(req, 'msg', 'validation_error');
     res.status(422).redirect(domain + 'create');
     return;
   }
-  const uploadFileName = req.file?.filename; // req.file egzistuoja tik jei yra failas
+  if (req.fileValidationError) {
+    addToSession(req, 'msg', 'file_error');
+    res.status(422).redirect(domain + 'create');
+    return;
+  }
 
   const book = { id, title, author, year, genre, isbn, pages, cover: uploadFileName };
   let data = fs.readFileSync('./data/books.json', 'utf8');
@@ -269,17 +288,27 @@ app.post('/update/:id', (req, res) => {
   const id = req.params.id;
   const oldBook = books.find(book => book.id === id);
   if (!oldBook) {
+    console.log('testuotojai patenka čia :)');
     show404(res);
     return;
   }
   const { title, author, year, genre, isbn, pages } = req.body;
+  const uploadFileName = req.file?.filename;
   if (!title || !author || !year || !genre || !isbn || !pages) {
+    if (uploadFileName) {
+      fs.existsSync(`public/images/${uploadFileName}`) &&
+        fs.unlinkSync(`public/images/${uploadFileName}`); // delete uploaded file
+    }
     addToSession(req, 'msg', 'validation_error');
     res.status(422).redirect(domain + 'edit/' + id);
     return;
   }
-
-  const uploadFileName = req.file?.filename;
+  if (req.fileValidationError) {
+    addToSession(req, 'msg', 'file_error');
+    res.status(422).redirect(domain + 'edit/' + id);
+    return;
+  }
+  
   let cover;
 
   if (!uploadFileName) {
@@ -288,13 +317,14 @@ app.post('/update/:id', (req, res) => {
     cover = uploadFileName;
   }
 
-  
-  if (req.body.delete_cover) {
+  if (req.body.delete_cover && !uploadFileName) {
     cover = undefined; // delete cover entry
   }
 
   if (req.body.delete_cover || uploadFileName) {
-    fs.unlinkSync(`public/images/${oldBook.cover}`); // delete old file
+    // if exists, delete old file
+    fs.existsSync(`public/images/${oldBook.cover}`) &&
+      fs.unlinkSync(`public/images/${oldBook.cover}`); // delete old file
   }
 
 
@@ -315,6 +345,12 @@ app.post('/destroy/:id', (req, res) => {
     show404(res);
     return;
   }
+
+  if (oldBook.cover) {
+    fs.existsSync(`public/images/${oldBook.cover}`) &&
+      fs.unlinkSync(`public/images/${oldBook.cover}`); // delete old file
+  }
+
   books = books.filter(book => book.id !== id);
   books = JSON.stringify(books);
   fs.writeFileSync('./data/books.json', books);
