@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <div class="card mt-5">
+                <h2 class="card-header">Prisijungti prie knygyno</h2>
+                <div class="card-body">
+                    <form action="{{domain}}login" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Vardas</label>
+                            <input type="text" class="form-control" name="name"
+                                value="{{#if oldData.name}}{{oldData.name}}{{/if}}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Slaptažodis</label>
+                            <input type="password" class="form-control" name="psw">
+                        </div>
+                        <button type="submit" class="btn btn-outline-info">Prisijungti</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
