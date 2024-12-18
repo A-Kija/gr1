@@ -229,6 +229,7 @@ app.get('/edit/:id', (req, res) => {
     ...book,
     message: getMessages(req),
     oldData: req.session.data.oldData || {},
+    user: req.session.data?.user || 'Svetimas (Alien)',
     loggedIn: req.session.data?.user ? true : false
   };
   const html = template(data);
