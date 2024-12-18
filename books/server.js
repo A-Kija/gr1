@@ -228,7 +228,8 @@ app.get('/edit/:id', (req, res) => {
     domain: domain,
     ...book,
     message: getMessages(req),
-    oldData: req.session.data.oldData || {}
+    oldData: req.session.data.oldData || {},
+    loggedIn: req.session.data?.user ? true : false
   };
   const html = template(data);
   res.send(html);
@@ -249,7 +250,9 @@ app.get('/show/:id', (req, res) => {
     pageTitle: `Rodyti knygą ${book.title}`,
     domain: domain,
     ...book,
-    user: req.session.data?.user || 'Svetimas (Alien)'
+    user: req.session.data?.user || 'Svetimas (Alien)',
+    loggedIn: req.session.data?.user ? true : false
+    
   };
   const html = template(data);
   res.send(html);
