@@ -43,4 +43,51 @@
             }
         }
     }
+
+    section#create, section#delete, section#edit {
+        border: 1px solid darkgoldenrod;
+        padding: 10px;
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            input, select {
+                margin-bottom: 10px;
+                padding: 5px;
+                outline: none;
+            }
+            label {
+                margin-bottom: 5px;
+            }
+
+            button {
+                padding: 5px;
+                background-color: darkgoldenrod;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    section#delete {
+        border: 1px solid crimson;
+
+        & > div {
+            button {
+                background-color: crimson;
+            }
+        }
+    }
+
+    section#edit {
+        border: 1px solid green;
+
+        & > div {
+            button {
+                background-color: green;
+            }
+        }
+    }
 }

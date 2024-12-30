@@ -13,6 +13,65 @@
             <h2>Medžių pasaulio sąrašas</h2>
             <ul></ul>
         </section>
+
+        <section id="create">
+            <h2>Naujo medžio sodinimas</h2>
+
+            <div>
+                <label>Pavadinimas</label>
+                <input type="text" data-tree data-name>
+            </div>
+
+            <div>
+                <label>Medžio tipas</label>
+                <select data-tree data-type>
+                    <option value="Spygliuotis">Spygliuotis</option>
+                    <option value="Lapuotis">Lapuotis</option>
+                    <option value="Palmė">Palmė</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Aukštis: <span data-height-show>0</span> m</label>
+                <input type="range" data-tree data-height min="0" max="99.99" step="0.01" value="0">
+            </div>
+
+            <div>
+                <button data-tree data-create>Sodinti medį</button>
+            </div>
+
+        </section>
+
+        <section id="delete">
+            <h2>Medžio kirtimas</h2>
+            <div>
+                <label>Medžio ID</label>
+                <input type="text" data-tree data-id>
+            </div>
+            <div>
+                <button data-tree data-delete>Kirsti medį</button>
+            </div>
+        </section>
+
+        <section id="edit">
+            <h2>Medžio laistymas</h2>
+            <div>
+                <label>Medžio ID</label>
+                <input type="text" data-tree data-id>
+            </div>
+            <div>
+                <label>Pavadinimas</label>
+                <input type="text" data-tree data-name>
+            </div>
+            <div>
+                <label>Aukštis: <span data-water-show>0</span> m</label>
+                <input type="range" data-tree data-water min="0" max="99.99" step="0.01" value="0">
+            </div>
+            <div>
+                <button data-tree data-edit>Laistyti medį</button>
+            </div>
+        </section>
+
     </div>
 
     <template>

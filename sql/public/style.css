@@ -38,3 +38,38 @@
   width: 100px;
   color: orange;
 }
+#app section#create, #app section#delete, #app section#edit {
+  border: 1px solid darkgoldenrod;
+  padding: 10px;
+}
+#app section#create > div, #app section#delete > div, #app section#edit > div {
+  display: flex;
+  flex-direction: column;
+}
+#app section#create > div input, #app section#create > div select, #app section#delete > div input, #app section#delete > div select, #app section#edit > div input, #app section#edit > div select {
+  margin-bottom: 10px;
+  padding: 5px;
+  outline: none;
+}
+#app section#create > div label, #app section#delete > div label, #app section#edit > div label {
+  margin-bottom: 5px;
+}
+#app section#create > div button, #app section#delete > div button, #app section#edit > div button {
+  padding: 5px;
+  background-color: darkgoldenrod;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#app section#delete {
+  border: 1px solid crimson;
+}
+#app section#delete > div button {
+  background-color: crimson;
+}
+#app section#edit {
+  border: 1px solid green;
+}
+#app section#edit > div button {
+  background-color: green;
+}
