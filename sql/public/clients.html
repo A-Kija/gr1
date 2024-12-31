@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost:6457/style.css">
+    <script src="http://localhost:6457/appc.js" defer></script>
+    <title>Klientų ir telefonų pasaulis</title>
+</head>
+<body>
+    <div id="app">
+
+        <section id="clients">
+            <h2>Klientų sąrašas</h2>
+            <ul></ul>
+        </section>
+
+        <section id="phones">
+            <h2>Telefonų sąrašas</h2>
+            <ul></ul>
+        </section>
+
+        
+
+    </div>
+
+    <template data-c-list>
+        <li>
+            <span class="tree-id" data-c-id></span>
+            <span class="tree-name" data-c-name></span>
+        </li>
+    </template>
+
+    <template data-p-list>
+        <li>
+            <span class="tree-id" data-p-id></span>
+            <span class="tree-id" data-c-id></span>
+            <span class="tree-name" data-p-number></span>
+        </li>
+    </template>
+    
+</body>
+</html>

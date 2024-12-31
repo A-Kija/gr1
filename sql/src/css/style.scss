@@ -3,7 +3,7 @@
     width: 100%;
     column-gap: 20px;
 
-    section#read {
+    section#read, section#clients {
         border: 1px solid skyblue;
         padding: 10px;
 
@@ -44,7 +44,7 @@
         }
     }
 
-    section#create, section#delete, section#edit {
+    section#create, section#delete, section#edit, section#clients {
         border: 1px solid darkgoldenrod;
         padding: 10px;
 

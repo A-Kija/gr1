@@ -33,6 +33,28 @@ const con = mysql.createConnection({
 // });
 
 
+app.get('/read-clients', (req, res) => {
+
+    const sql = `
+        SELECT *
+        FROM clients
+    `;
+
+    con.query(sql, (err, data) => {
+        if (err) {
+            res.send('Klaida gaunant duomenis');
+            return;
+        }
+        res.json(data);
+    });
+
+
+});
+
+
+
+
+
 app.get('/read', (req, res) => {
 
     const sql = `

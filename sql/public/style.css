@@ -4,57 +4,57 @@
   -moz-column-gap: 20px;
        column-gap: 20px;
 }
-#app section#read {
+#app section#read, #app section#clients {
   border: 1px solid skyblue;
   padding: 10px;
 }
-#app section#read ul {
+#app section#read ul, #app section#clients ul {
   list-style: none;
   padding: 0;
 }
-#app section#read ul li {
+#app section#read ul li, #app section#clients ul li {
   margin-bottom: 10px;
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
 }
-#app section#read ul li span {
+#app section#read ul li span, #app section#clients ul li span {
   display: inline-block;
   font-size: 20px;
 }
-#app section#read ul li span.tree-id {
+#app section#read ul li span.tree-id, #app section#clients ul li span.tree-id {
   font-weight: bold;
   color: cadetblue;
   width: 50px;
 }
-#app section#read ul li span.tree-name {
+#app section#read ul li span.tree-name, #app section#clients ul li span.tree-name {
   width: 120px;
 }
-#app section#read ul li span.tree-height {
+#app section#read ul li span.tree-height, #app section#clients ul li span.tree-height {
   width: 80px;
   font-style: italic;
 }
-#app section#read ul li span.tree-type {
+#app section#read ul li span.tree-type, #app section#clients ul li span.tree-type {
   width: 100px;
   color: orange;
 }
-#app section#create, #app section#delete, #app section#edit {
+#app section#create, #app section#delete, #app section#edit, #app section#clients {
   border: 1px solid darkgoldenrod;
   padding: 10px;
 }
-#app section#create > div, #app section#delete > div, #app section#edit > div {
+#app section#create > div, #app section#delete > div, #app section#edit > div, #app section#clients > div {
   display: flex;
   flex-direction: column;
 }
-#app section#create > div input, #app section#create > div select, #app section#delete > div input, #app section#delete > div select, #app section#edit > div input, #app section#edit > div select {
+#app section#create > div input, #app section#create > div select, #app section#delete > div input, #app section#delete > div select, #app section#edit > div input, #app section#edit > div select, #app section#clients > div input, #app section#clients > div select {
   margin-bottom: 10px;
   padding: 5px;
   outline: none;
 }
-#app section#create > div label, #app section#delete > div label, #app section#edit > div label {
+#app section#create > div label, #app section#delete > div label, #app section#edit > div label, #app section#clients > div label {
   margin-bottom: 5px;
 }
-#app section#create > div button, #app section#delete > div button, #app section#edit > div button {
+#app section#create > div button, #app section#delete > div button, #app section#edit > div button, #app section#clients > div button {
   padding: 5px;
   background-color: darkgoldenrod;
   color: white;
