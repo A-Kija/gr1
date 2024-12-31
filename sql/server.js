@@ -32,14 +32,13 @@ const con = mysql.createConnection({
 //     res.send('OK');
 // });
 
-
-app.get('/read-clients', (req, res) => {
-
+app.get('/read-full', (req, res) => {
     const sql = `
-        SELECT *
-        FROM clients
+        SELECT c.id, name, p.id AS phone_id, client_id, number
+        FROM clients AS c
+        RIGHT JOIN phones AS p
+        ON c.id = p.client_id
     `;
-
     con.query(sql, (err, data) => {
         if (err) {
             res.send('Klaida gaunant duomenis');
@@ -47,8 +46,35 @@ app.get('/read-clients', (req, res) => {
         }
         res.json(data);
     });
+});
 
 
+app.get('/read-clients', (req, res) => {
+    const sql = `
+        SELECT *
+        FROM clients
+    `;
+    con.query(sql, (err, data) => {
+        if (err) {
+            res.send('Klaida gaunant duomenis');
+            return;
+        }
+        res.json(data);
+    });
+});
+
+app.get('/read-phones', (req, res) => {
+    const sql = `
+        SELECT *
+        FROM phones
+    `;
+    con.query(sql, (err, data) => {
+        if (err) {
+            res.send('Klaida gaunant duomenis');
+            return;
+        }
+        res.json(data);
+    });
 });
 
 

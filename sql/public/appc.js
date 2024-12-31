@@ -7102,9 +7102,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var clientsUl = document.querySelector('#clients ul');
 var phonesUl = document.querySelector('#phones ul');
+var fullUl = document.querySelector('#full ul');
 var readClients = function readClients(_) {
   axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('http://localhost:6457/read-clients').then(function (res) {
-    clientsUl.innerHTML = '';
+    clientsUl.innerHTML = "\n                <li>\n                    <span class=\"tree-id\">ID</span>\n                    <span class=\"tree-name\">Vardas</span>\n                </li>";
     res.data.forEach(function (client) {
       var clone = document.querySelector('[data-c-list]').content.cloneNode(true);
       var id = clone.querySelector('[data-c-id]');
@@ -7117,18 +7118,41 @@ var readClients = function readClients(_) {
 };
 var readPhones = function readPhones(_) {
   axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('http://localhost:6457/read-phones').then(function (res) {
-    clientsUl.innerHTML = '';
-    res.data.forEach(function (client) {
+    phonesUl.innerHTML = "\n                <li>\n                    <span class=\"tree-id\">ID</span>\n                    <span class=\"tree-id\">CID</span>\n                    <span class=\"tree-name\">Numeris</span>\n                </li>";
+    res.data.forEach(function (phone) {
       var clone = document.querySelector('[data-p-list]').content.cloneNode(true);
-      var id = clone.querySelector('[data-c-id]');
-      var name = clone.querySelector('[data-c-name]');
-      id.innerText = client.id + '.';
-      name.innerText = client.name;
-      clientsUl.appendChild(clone);
+      var id = clone.querySelector('[data-p-id]');
+      var cid = clone.querySelector('[data-c-id]');
+      var number = clone.querySelector('[data-p-number]');
+      id.innerText = phone.id + '.';
+      cid.innerText = phone.client_id + '.';
+      number.innerText = phone.number;
+      phonesUl.appendChild(clone);
+    });
+  });
+};
+var readFull = function readFull(_) {
+  axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('http://localhost:6457/read-full').then(function (res) {
+    fullUl.innerHTML = "\n                <li>\n                    <span class=\"tree-id\">ID</span>\n                    <span class=\"tree-name\">Vardas</span>\n                \n                    <span class=\"tree-id\">PID</span>\n                    <span class=\"tree-id\">CID</span>\n                    <span class=\"tree-name\">Numeris</span>\n                </li>";
+    res.data.forEach(function (full) {
+      var clone = document.querySelector('[data-f-list]').content.cloneNode(true);
+      var cid = clone.querySelector('[data-c-id]');
+      var cname = clone.querySelector('[data-c-name]');
+      var pid = clone.querySelector('[data-p-id]');
+      var cpid = clone.querySelector('[data-cp-id]');
+      var pnumber = clone.querySelector('[data-p-number]');
+      cid.innerText = full.id + '.';
+      cname.innerText = full.name;
+      pid.innerText = full.phone_id + '.';
+      cpid.innerText = full.client_id + '.';
+      pnumber.innerText = full.number;
+      fullUl.appendChild(clone);
     });
   });
 };
 readClients();
+readPhones();
+readFull();
 })();
 
 /******/ })()

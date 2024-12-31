@@ -4,37 +4,37 @@
   -moz-column-gap: 20px;
        column-gap: 20px;
 }
-#app section#read, #app section#clients {
+#app section#read, #app section#clients, #app section#phones, #app section#full {
   border: 1px solid skyblue;
   padding: 10px;
 }
-#app section#read ul, #app section#clients ul {
+#app section#read ul, #app section#clients ul, #app section#phones ul, #app section#full ul {
   list-style: none;
   padding: 0;
 }
-#app section#read ul li, #app section#clients ul li {
+#app section#read ul li, #app section#clients ul li, #app section#phones ul li, #app section#full ul li {
   margin-bottom: 10px;
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
 }
-#app section#read ul li span, #app section#clients ul li span {
+#app section#read ul li span, #app section#clients ul li span, #app section#phones ul li span, #app section#full ul li span {
   display: inline-block;
   font-size: 20px;
 }
-#app section#read ul li span.tree-id, #app section#clients ul li span.tree-id {
+#app section#read ul li span.tree-id, #app section#clients ul li span.tree-id, #app section#phones ul li span.tree-id, #app section#full ul li span.tree-id {
   font-weight: bold;
   color: cadetblue;
   width: 50px;
 }
-#app section#read ul li span.tree-name, #app section#clients ul li span.tree-name {
-  width: 120px;
+#app section#read ul li span.tree-name, #app section#clients ul li span.tree-name, #app section#phones ul li span.tree-name, #app section#full ul li span.tree-name {
+  width: 220px;
 }
-#app section#read ul li span.tree-height, #app section#clients ul li span.tree-height {
+#app section#read ul li span.tree-height, #app section#clients ul li span.tree-height, #app section#phones ul li span.tree-height, #app section#full ul li span.tree-height {
   width: 80px;
   font-style: italic;
 }
-#app section#read ul li span.tree-type, #app section#clients ul li span.tree-type {
+#app section#read ul li span.tree-type, #app section#clients ul li span.tree-type, #app section#phones ul li span.tree-type, #app section#full ul li span.tree-type {
   width: 100px;
   color: orange;
 }

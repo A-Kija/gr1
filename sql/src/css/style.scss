@@ -3,7 +3,7 @@
     width: 100%;
     column-gap: 20px;
 
-    section#read, section#clients {
+    section#read, section#clients, section#phones, section#full{
         border: 1px solid skyblue;
         padding: 10px;
 
@@ -28,7 +28,7 @@
                 }
 
                 span.tree-name {
-                    width: 120px;
+                    width: 220px;
                 }
 
                 span.tree-height {
