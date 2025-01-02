@@ -78,9 +78,6 @@ app.get('/read-phones', (req, res) => {
 });
 
 
-
-
-
 app.get('/read', (req, res) => {
 
     const sql = `
