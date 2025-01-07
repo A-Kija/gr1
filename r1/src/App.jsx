@@ -1,55 +1,27 @@
 import './app.css';
-import Auto from './Components/Auto';
-import Namas from './Components/Namas';
-import Parkas from './Components/Parkas';
-import RandomColor from './Components/RandomColor';
-import Volvo from './Components/Volvo';
-
-import rand from './Functions/rand';
-import randomColor from './Functions/randomColor';
-
-import kazka from './Functions/demoEx';
-
-import C, { A, B } from './Functions/demoEx';
-
-import * as demo from './Functions/demoEx';
-
+import './buttons.scss';
+import B043 from './Components/B043';
+// import ButtonsTest from './Components/ButtonsTest';
+import C043 from './Components/C043';
+import { useState } from 'react';
 
 function App() {
 
-    return (
-        <div className="app">
-            <header className="app-header">
+    const [size, setSize] = useState(100);
 
-                {kazka()} {A()} {B()} {C()}
+  return (
+    <div className="app">
+      <header className="app-header">
 
-                {demo.A()} {demo.B()} {demo.default()}
+        {/* <ButtonsTest /> */}
 
-                {/* <Namas numeris='1' spalva='red' kiekis='5' atsFun={rand} />
-               <Namas numeris='2' spalva='green' kiekis='8' atsFun={rand} />
-               <Namas numeris='3' spalva='blue' kiekis='1' atsFun={rand} /> */}
+        <B043 setSize={setSize} />
+        <C043 size={size} />
 
-                {/* <Parkas koks={rand(1, 4)} /> */}
 
-                <Auto text={<RandomColor ct="bla" />}>
-                    <h1>Opel</h1>
-                </Auto>
-                <Auto text={<RandomColor ct="ku ku" />}>
-                    <h3>BMW</h3>
-                </Auto>
-
-                <Auto text={<RandomColor />}><Volvo /></Auto>
-
-                <h2 style={{
-                    position: 'relative',
-                    top: rand(-300, 300) + 'px',
-                    color: randomColor(),
-                    letterSpacing: rand(5, 30) + 'px',
-                }}>REACT<RandomColor /></h2>
-
-            </header>
-        </div>
-    );
+      </header>
+    </div>
+  );
 }
 
 export default App;
