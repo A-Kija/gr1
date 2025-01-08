@@ -31,3 +31,41 @@ body {
     transform: rotate(360deg);
   }
 }
+
+input, select {
+  margin: 20px;
+  font-size: 20px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 5px 10px;
+  color: white;
+}
+
+input.green {
+  border: 1px solid #80CFA9;
+  color: #80CFA9;
+}
+
+select {
+  border: 1px solid #F18F01;
+  color: #F18F01;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  color: white;
+  cursor: pointer;
+  padding: 0 0 0 20px;
+  font-family: monospace;
+  user-select: none;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+input[type="checkbox"]:checked + label {
+  color: #F18F01;
+}
