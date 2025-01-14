@@ -52,9 +52,9 @@ select {
   color: #F18F01;
 }
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   display: none;
-}
+} */
 
 label {
   color: white;

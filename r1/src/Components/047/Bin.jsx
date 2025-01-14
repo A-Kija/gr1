@@ -1,12 +1,31 @@
 import H2 from './H2';
 import Input from './Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Bin() {
 
-    const [input, setInput] = useState('Nieko nėra');
+
+    const [input, setInput] = useState('');
     const [text, setText] = useState('');
-    const [color, setColor] = useState('');
+    const [color, setColor] = useState(null);
+    const [cb, setCb] = useState(false);
+
+
+    console.log('Bin komponentas atnaujintas');
+
+    useEffect(_ => {
+        console.log('Bin komponentas sukurtas');
+    }, []);
+
+    useEffect(_ => {
+        console.log('Bin komponente pasikeitė tekstas');
+    }, [text]);
+
+    useEffect(_ => {
+        console.log('Bin komponente pasikeitė spalva arba cb');
+        // setCb(c => !c);
+    }, [color, cb]);
+
 
     const add = _ => {
         setText(input);
@@ -14,7 +33,7 @@ export default function Bin() {
     }
 
     const doColor = _ => {
-        setColor('green');
+        setColor(c => c === 'green' ? null : 'green');
     }
 
     return (
@@ -25,7 +44,7 @@ export default function Bin() {
                 <button className="green" onClick={doColor}>Color</button>
             </div>
             <H2 text={text} color={color} />
-            <Input input={input} setInput={setInput} />
+            <Input input={input} setInput={setInput} cb={cb} setCb={setCb}/>
 
         </div>
     );
