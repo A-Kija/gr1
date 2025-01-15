@@ -94,5 +94,16 @@ const astuntasPliusVardas = gyvuliai.toSorted((a, b) => {
 
 console.log(astuntasPliusVardas);
 
+console.clear();
+
+
+const fun1 = (a, b) => a + b;
+const fun2 = (a, b) => a + b;
+
+
+
+
+console.log(fun1 === fun2);
+
 
 
