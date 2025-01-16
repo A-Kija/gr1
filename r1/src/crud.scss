@@ -1,0 +1,35 @@
+@import 'bootstrap/scss/bootstrap';
+
+button {
+    height: 38px;
+    padding: 0 30px;
+    line-height: 1;
+}
+
+
+.states-cb {
+    margin-top: 30px;
+    input {
+        display: none;
+    }
+    label {
+        padding: 5px;
+        text-align: center;
+        width: 50px;
+        cursor: pointer;
+        margin-right: 10px;
+        border-radius: 5px;
+        user-select: none;
+    }
+    input:checked + label {
+        background-color: #007bff;
+        color: white;
+    }
+}
+
+.satellites {
+    .satellite {
+        display: flex;
+        column-gap: 10px;
+    }
+}
