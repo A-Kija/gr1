@@ -1,4 +1,5 @@
 @import 'bootstrap/scss/bootstrap';
+@import './buttons';
 
 button {
     height: 38px;
@@ -20,9 +21,14 @@ button {
         margin-right: 10px;
         border-radius: 5px;
         user-select: none;
+        border: 1px solid #dddddd;
+        transition: all .3s;
+        &:hover {
+            border-color: $yellow;
+        }
     }
     input:checked + label {
-        background-color: #007bff;
+        background-color: $yellow;
         color: white;
     }
 }
@@ -31,5 +37,9 @@ button {
     .satellite {
         display: flex;
         column-gap: 10px;
+        align-items: center;
+        input {
+            height: 38px;
+        }
     }
 }
