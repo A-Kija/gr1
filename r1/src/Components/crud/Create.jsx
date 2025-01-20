@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { STATES } from '../../Constants/crud';
 
+const defaultPlanetData = { 'name': '', 'state': -1, 'size': 0 };
+const defaultSatellites = [''];
+
 export default function Create({ setStoreData }) {
 
-    const [satellites, setSatellites] = useState(['']);
-    const [planetData, setPlanetData] = useState({ 'name': '', 'state': -1, 'size': 0 });
+    const [satellites, setSatellites] = useState(defaultSatellites);
+    const [planetData, setPlanetData] = useState(defaultPlanetData);
 
     const addSatellite = _ => {
         setSatellites(s => [...s, '']);
@@ -26,6 +29,8 @@ export default function Create({ setStoreData }) {
             size: parseFloat(planetData.size)
          };
         setStoreData(data);
+        setSatellites(defaultSatellites);
+        setPlanetData(defaultPlanetData);
     }
 
 

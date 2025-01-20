@@ -2,9 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const app = express();
+const cors = require('cors');
 
 const port = 3333;
 app.use(bodyParser.json());
+
+app.use(cors());
 
 
 const con = mysql.createConnection({
@@ -12,6 +15,27 @@ const con = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'cosmos'
+});
+
+app.get('/api/planet', (req, res) => {
+
+    const sql = `
+        SELECT * FROM planets
+    `;
+
+    con.query(sql, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        result.forEach(planet => {
+            planet.satellites = JSON.parse(planet.satellites);
+        });
+
+        res.json(result);
+    });
+
 });
 
 app.post('/api/planet', (req, res) => {
