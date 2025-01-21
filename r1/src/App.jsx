@@ -8,6 +8,7 @@ import { URL } from './Constants/crud';
 
 import Create from './Components/crud/Create';
 import List from './Components/crud/List';
+import Edit from './Components/crud/Edit';
 
 
 export default function App() {
@@ -17,7 +18,10 @@ export default function App() {
 
 
     const [data, setData] = useState(null);
+    const [createData, setCreateData] = useState(null);
     const [storeData, setStoreData] = useState(null);
+    const [editData, setEditData] = useState(null);
+    const [updateData, setUpdateData] = useState(null);
 
 
     useEffect(_ => {
@@ -53,13 +57,18 @@ export default function App() {
                 }));
 
             })
-            .catch(error => {
-                console.error(error);
-                setData(d => d.filter(planet => planet.id !== id));
+            .catch(_ => {
+
+                setData(d => {
+                    const oldCreateData = d.find(planet => planet.id === id);
+                    setCreateData(oldCreateData);
+                    
+                    return d.filter(planet => planet.id !== id);
+                });
             });
 
 
-            
+
         console.log('APP USE EFFECT storeData');
 
     }, [storeData]);
@@ -67,16 +76,21 @@ export default function App() {
 
 
     return (
+        <>
         <div className="container">
             <div className="row">
                 <div className="col-4">
-                    <Create setStoreData={setStoreData} />
+                    <Create setStoreData={setStoreData} createData={createData} />
                 </div>
                 <div className="col-8">
                     <List data={data} />
                 </div>
             </div>
         </div>
+        {
+            editData !== null && <Edit />
+        }
+        </>
     );
 }
 

@@ -1,6 +1,15 @@
 @import 'bootstrap/scss/bootstrap';
 @import './buttons';
 
+.list-group-item {
+    transition: all .3s;
+}
+
+.modal {
+    display: block;
+    background-color: #00000055;
+}
+
 button {
     height: 38px;
     padding: 0 30px;

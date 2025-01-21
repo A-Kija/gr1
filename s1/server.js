@@ -52,6 +52,11 @@ app.post('/api/planet', (req, res) => {
 
         const { name, state, size, satellites } = req.body;
 
+        if (!size) {
+            res.status(400).json({ error: 'Planet size is required' });
+            return;
+        }
+
         const sql = `
         INSERT INTO planets 
         (name, state, size, satellites)

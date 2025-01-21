@@ -4,18 +4,10 @@ import { STATES } from '../../Constants/crud';
 const defaultPlanetData = { 'name': '', 'state': -1, 'size': 0 };
 const defaultSatellites = [''];
 
-export default function Create({ setStoreData, createData }) {
+export default function Edit() {
 
     const [satellites, setSatellites] = useState(defaultSatellites);
     const [planetData, setPlanetData] = useState(defaultPlanetData);
-
-    useEffect(_ => {
-        if (createData === null) {
-            return;
-        }
-        setSatellites(createData.satellites);
-        setPlanetData({...createData})
-    }, [createData]);
 
     const addSatellite = _ => {
         setSatellites(s => [...s, '']);
@@ -36,24 +28,22 @@ export default function Create({ setStoreData, createData }) {
             state: planetData.state,
             size: parseFloat(planetData.size)
          };
-        setStoreData(data);
+        // setStoreData(data);
         setSatellites(defaultSatellites);
         setPlanetData(defaultPlanetData);
     }
 
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-12">
-
-                    <div className="card mt-5">
-                        <div className="card-header">
-                            <h2>Add new planet</h2>
-                        </div>
+        <div className="modal">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h2 className="modal-title">Edit planet</h2>
+                        <button type="button" className="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
                         <div className="card-body">
-                            <p className="card-text">Here you can add a newly discovered planet.</p>
-
                             <div className="mb-3">
                                 <label className="form-label">Planet name</label>
                                 <input type="text" className="form-control"
@@ -98,12 +88,15 @@ export default function Create({ setStoreData, createData }) {
                                     <button className="green" onClick={addSatellite}>+</button>
                                 </div>
                             </div>
-                            <button className="yellow" onClick={submitData}>Add planet</button>
                         </div>
                     </div>
-
+                    <div className="modal-footer">
+                        <button type="button">Close</button>
+                        <button type="button" className="blue">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
     );
+
 }
