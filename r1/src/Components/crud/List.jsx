@@ -1,3 +1,5 @@
+import ListPlanet from './ListPlanet';
+
 export default function List({ data }) {
 
     return (
@@ -15,11 +17,7 @@ export default function List({ data }) {
                                 {
                                     data !== null 
                                     ?
-                                    data.map(planet => (
-                                        <li key={planet.id} className="list-group-item">
-                                            {planet.name}
-                                        </li>
-                                    ))
+                                    data.map(planet => <ListPlanet key={planet.id} planet={planet} />)
                                     :
                                     <li className="list-group-item">
                                         <h3>Planets are loading...</h3>

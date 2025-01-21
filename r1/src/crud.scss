@@ -43,3 +43,14 @@ button {
         }
     }
 }
+
+.planet-in-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -19,43 +19,55 @@ const con = mysql.createConnection({
 
 app.get('/api/planet', (req, res) => {
 
-    const sql = `
+
+    setTimeout(_ => {
+
+        const sql = `
         SELECT * FROM planets
     `;
 
-    con.query(sql, (err, result) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
+        con.query(sql, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ error: err.message });
+                return;
+            }
 
-        result.forEach(planet => {
-            planet.satellites = JSON.parse(planet.satellites);
+            result.forEach(planet => {
+                planet.satellites = JSON.parse(planet.satellites);
+            });
+
+            res.json(result);
         });
 
-        res.json(result);
-    });
+    }, 2000);
+
+
 
 });
 
 app.post('/api/planet', (req, res) => {
 
-    const { name, state, size, satellites } = req.body;
+    setTimeout(_ => {
 
-    const sql = `
+        const { name, state, size, satellites } = req.body;
+
+        const sql = `
         INSERT INTO planets 
         (name, state, size, satellites)
         VALUES (?, ?, ?, ?)
     `;
 
-    con.query(sql, [name, state, size, JSON.stringify(satellites)], (err, result) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
+        con.query(sql, [name, state, size, JSON.stringify(satellites)], (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message });
+                return;
+            }
 
-        res.status(201).json({ id: result.insertId });
-    });
+            res.status(201).json({ id: result.insertId });
+        });
+
+    }, 4000);
 
 
 });
