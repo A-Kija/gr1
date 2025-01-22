@@ -34,7 +34,7 @@ export default function Create({ setStoreData, createData }) {
             satellites,
             name: planetData.name,
             state: planetData.state,
-            size: parseFloat(planetData.size)
+            size: isNaN(parseFloat(planetData.size)) ? 0 : parseFloat(planetData.size),
          };
         setStoreData(data);
         setSatellites(defaultSatellites);

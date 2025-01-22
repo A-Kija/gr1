@@ -84,4 +84,12 @@ button {
             background-color: darken($yellow, 5%);
         }
     }
+    &:disabled {
+        background-color: gray;
+        cursor: default;
+        opacity: .5;
+        &:hover {
+            background-color: gray;
+        }
+    }
 }

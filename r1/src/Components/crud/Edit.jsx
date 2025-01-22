@@ -4,10 +4,23 @@ import { STATES } from '../../Constants/crud';
 const defaultPlanetData = { 'name': '', 'state': -1, 'size': 0 };
 const defaultSatellites = [''];
 
-export default function Edit() {
+export default function Edit({ setEditData, editData, setUpdateData }) {
 
     const [satellites, setSatellites] = useState(defaultSatellites);
     const [planetData, setPlanetData] = useState(defaultPlanetData);
+
+    useEffect(_ => {
+        if (null === editData) {
+            return;
+        }
+        setSatellites(editData.satellites);
+        setPlanetData({
+            name: editData.name,
+            state: editData.state,
+            size: editData.size
+        });
+
+    }, [editData]);
 
     const addSatellite = _ => {
         setSatellites(s => [...s, '']);
@@ -22,13 +35,15 @@ export default function Edit() {
     }
 
     const submitData = _ => {
-        const data = { 
+        const data = {
             satellites,
             name: planetData.name,
             state: planetData.state,
-            size: parseFloat(planetData.size)
-         };
-        // setStoreData(data);
+            size: isNaN(parseFloat(planetData.size)) ? 0 : parseFloat(planetData.size),
+            id: editData.id
+        };
+        setUpdateData(data);
+        setEditData(null);
         setSatellites(defaultSatellites);
         setPlanetData(defaultPlanetData);
     }
@@ -40,7 +55,7 @@ export default function Edit() {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h2 className="modal-title">Edit planet</h2>
-                        <button type="button" className="btn-close" aria-label="Close"></button>
+                        <button type="button" className="btn-close" aria-label="Close" onClick={_ => setEditData(null)}></button>
                     </div>
                     <div className="modal-body">
                         <div className="card-body">
@@ -91,8 +106,8 @@ export default function Edit() {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button">Close</button>
-                        <button type="button" className="blue">Save changes</button>
+                        <button type="button" onClick={_ => setEditData(null)}>Close</button>
+                        <button type="button" className="blue" onClick={submitData}>Save changes</button>
                     </div>
                 </div>
             </div>
