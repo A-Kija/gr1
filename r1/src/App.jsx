@@ -1,7 +1,7 @@
 import './crud.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { URL } from './Constants/crud';
@@ -10,12 +10,10 @@ import Create from './Components/crud/Create';
 import List from './Components/crud/List';
 import Edit from './Components/crud/Edit';
 import Delete from './Components/crud/Delete';
+import Messages from './Components/crud/Messages';
 
 
 export default function App() {
-
-    console.log('APP RENDER');
-
 
 
     const [data, setData] = useState(null);
@@ -26,18 +24,42 @@ export default function App() {
     const [deleteData, setDeleteData] = useState(null);
     const [destroyData, setDestroyData] = useState(null);
 
+    const [messages, setMessages] = useState([]);
+
+    const addMessage = useCallback((message, oldId = 0) => {
+        const id = oldId ? oldId : uuidv4();
+        if (oldId) {
+            setMessages(m => m.map(msg => msg.id === oldId ? { id, ...message } : msg));
+        } else {
+            setMessages(m => [{ id, ...message }, ...m]);
+        }
+        setTimeout(_ => {
+            setMessages(m => m.filter(msg => msg.id !== id));
+        }, 15000);
+        return id;
+    }, [setMessages]);
+
+    const closeMessage = id => {
+        setMessages(m => m.filter(msg => msg.id !== id));
+    }
+
 
     useEffect(_ => {
         axios.get(URL)
             .then(response => {
-                console.log(response.data);
                 setData(response.data);
             })
             .catch(error => {
-                console.error(error);
+                if (error.response) {
+                    addMessage(error.response.data.msg);
+                } else {
+                    addMessage({
+                        type: 'danger',
+                        title: error.code,
+                        text: error.message
+                    });
+                }
             });
-
-
     }, []);
 
 
@@ -47,10 +69,14 @@ export default function App() {
         }
         const id = uuidv4();
         setData(d => [{ id, ...storeData, temp: true }, ...d]);
-
+        const msgId = addMessage({
+            type: 'info',
+            title: 'Saving...',
+            text: 'Please wait'
+        });
         axios.post(URL, storeData)
             .then(response => {
-                console.log(response);
+                addMessage(response.data.msg, msgId);
                 setData(d => d.map(planet => {
                     if (planet.id === id) {
                         delete planet.temp;
@@ -58,10 +84,17 @@ export default function App() {
                     }
                     return planet;
                 }));
-
             })
-            .catch(_ => {
-
+            .catch(error => {
+                if (error.response) {
+                    addMessage(error.response.data.msg, msgId);
+                } else {
+                    addMessage({
+                        type: 'danger',
+                        title: error.code,
+                        text: error.message
+                    }, msgId);
+                }
                 setData(d => {
                     const oldCreateData = d.find(planet => planet.id === id);
                     setCreateData(oldCreateData);
@@ -69,12 +102,7 @@ export default function App() {
                     return d.filter(planet => planet.id !== id);
                 });
             });
-
-
-
-        console.log('APP USE EFFECT storeData');
-
-    }, [storeData]);
+    }, [storeData, setData, setCreateData, addMessage]);
 
 
     useEffect(_ => {
@@ -83,13 +111,19 @@ export default function App() {
         }
         setData(d => d.map(planet => {
             if (planet.id === updateData.id) {
-                return { ...updateData, temp: true, oldData: {...planet} };
+                return { ...updateData, temp: true, oldData: { ...planet } };
             }
             return planet;
         }));
+        const msgId = addMessage({
+            type: 'info',
+            title: 'Updating...',
+            text: 'Please wait'
+        });
 
         axios.put(URL + '/' + updateData.id, updateData)
-            .then(_ => {
+            .then(response => {
+                addMessage(response.data.msg, msgId);
                 setData(d => d.map(planet => {
                     if (planet.id === updateData.id) {
                         delete planet.temp;
@@ -98,7 +132,16 @@ export default function App() {
                     return planet;
                 }));
             })
-            .catch(_ => {
+            .catch(error => {
+                if (error.response) {
+                    addMessage(error.response.data.msg, msgId);
+                } else {
+                    addMessage({
+                        type: 'danger',
+                        title: error.code,
+                        text: error.message
+                    }, msgId);
+                }
                 setData(d => d.map(planet => {
                     if (planet.id === updateData.id) {
                         return planet.oldData;
@@ -107,8 +150,6 @@ export default function App() {
                 }));
                 setEditData(updateData);
             });
-
-
     }, [updateData]);
 
     useEffect(_ => {
@@ -122,11 +163,27 @@ export default function App() {
             return planet;
         }));
 
+        const msgId = addMessage({
+            type: 'info',
+            title: 'Deleting...',
+            text: 'Please wait'
+        });
+
         axios.delete(URL + '/' + destroyData.id)
-            .then(_ => {
+            .then(response => {
+                addMessage(response.data.msg, msgId);
                 setData(d => d.filter(planet => planet.id !== destroyData.id));
             })
-            .catch(_ => {
+            .catch(error => {
+                if (error.response) {
+                    addMessage(error.response.data.msg, msgId);
+                } else {
+                    addMessage({
+                        type: 'danger',
+                        title: error.code,
+                        text: error.message
+                    }, msgId);
+                }
                 setData(d => d.map(planet => {
                     if (planet.id === destroyData.id) {
                         delete planet.temp;
@@ -144,7 +201,7 @@ export default function App() {
             <div className="container">
                 <div className="row">
                     <div className="col-4">
-                        <Create setStoreData={setStoreData} createData={createData} />
+                        <Create setStoreData={setStoreData} createData={createData} addMessage={addMessage} />
                     </div>
                     <div className="col-8">
                         <List data={data} setEditData={setEditData} setDeleteData={setDeleteData} />
@@ -156,6 +213,9 @@ export default function App() {
             }
             {
                 deleteData !== null && <Delete setDeleteData={setDeleteData} deleteData={deleteData} setDestroyData={setDestroyData} />
+            }
+            {
+                messages.length > 0 && <Messages messages={messages} closeMessage={closeMessage} />
             }
         </>
     );

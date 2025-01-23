@@ -63,3 +63,15 @@ button {
         flex-direction: column;
     }
 }
+
+.msg-bin {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 30px;
+    z-index: 1000;
+    max-width: 400px;
+    .btn-close {
+        padding: 5px;
+    }
+}

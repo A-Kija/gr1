@@ -52,7 +52,14 @@ app.post('/api/planet', (req, res) => {
         const { name, state, size, satellites } = req.body;
 
         if (!size) {
-            res.status(400).json({ error: 'Planet size is required' });
+            res.status(400).json({ 
+                error: 'Planet size is required',
+                msg: {
+                    title: 'Error!',
+                    text: 'Planet size is required',
+                    type: 'danger'
+                }
+            });
             return;
         }
 
@@ -68,7 +75,14 @@ app.post('/api/planet', (req, res) => {
                 return;
             }
 
-            res.status(201).json({ id: result.insertId });
+            res.status(201).json({ 
+                id: result.insertId,
+                msg: {
+                    title: 'New!',
+                    text: `A new planet was discovered - ${name}.`,
+                    type: 'success'
+                }
+             });
         });
 
     }, 4000);
@@ -105,7 +119,14 @@ app.put('/api/planet/:id', (req, res) => {
                 return;
             }
 
-            res.json({ id });
+            res.json({ 
+                id,
+                msg: {
+                    title: 'Update!',
+                    text: `Planet ${name} was updated.`,
+                    type: 'info'
+                }
+             });
         });
 
     }, 2000);
@@ -134,7 +155,14 @@ app.delete('/api/planet/:id', (req, res) => {
                 return;
             }
 
-            res.json({ id });
+            res.json({ 
+                id,
+                msg: {
+                    title: 'Delete!',
+                    text: `Planet was destroyed.`,
+                    type: 'warning'
+                }
+             });
         });
 
     }, 3000);

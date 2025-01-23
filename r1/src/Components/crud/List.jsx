@@ -15,13 +15,19 @@ export default function List({ data, setEditData, setDeleteData }) {
 
                             <ul className="list-group list-group-flush">
                                 {
-                                    data !== null 
-                                    ?
-                                    data.map(planet => <ListPlanet key={planet.id} planet={planet} setEditData={setEditData} setDeleteData={setDeleteData} />)
-                                    :
-                                    <li className="list-group-item">
-                                        <h3>Planets are loading...</h3>
-                                    </li>
+                                    data !== null
+                                        ?
+                                        data.length
+                                            ?
+                                            data.map(planet => <ListPlanet key={planet.id} planet={planet} setEditData={setEditData} setDeleteData={setDeleteData} />)
+                                            :
+                                            <li className="list-group-item">
+                                                <h3>No planets found</h3>
+                                            </li>
+                                        :
+                                        <li className="list-group-item">
+                                            <h3>Planets are loading...</h3>
+                                        </li>
                                 }
                             </ul>
 

@@ -4,7 +4,7 @@ import { STATES } from '../../Constants/crud';
 const defaultPlanetData = { 'name': '', 'state': -1, 'size': 0 };
 const defaultSatellites = [''];
 
-export default function Create({ setStoreData, createData }) {
+export default function Create({ setStoreData, createData, addMessage }) {
 
     const [satellites, setSatellites] = useState(defaultSatellites);
     const [planetData, setPlanetData] = useState(defaultPlanetData);
@@ -13,7 +13,7 @@ export default function Create({ setStoreData, createData }) {
         if (createData === null) {
             return;
         }
-        setSatellites(createData.satellites);
+        setSatellites(createData?.satellites ?? []);
         setPlanetData({...createData})
     }, [createData]);
 
@@ -41,6 +41,23 @@ export default function Create({ setStoreData, createData }) {
         setPlanetData(defaultPlanetData);
     }
 
+    const dataValidator = target => {
+        const { name, value } = target;
+
+        // Name has numbers?
+        if (name === 'name' && /\d/.test(value)) {
+            target.value = value.replace(/\d/g, ''); // sanitize
+            addMessage(
+                { type: 'danger', title: 'Invalid name', text: 'Name cannot contain numbers.' }
+            );
+            return;
+        }
+
+        console.log(name, value);
+
+        setPlanetData(p => ({ ...p, [name]: value }));
+    }
+
 
     return (
         <div className="container">
@@ -56,9 +73,9 @@ export default function Create({ setStoreData, createData }) {
 
                             <div className="mb-3">
                                 <label className="form-label">Planet name</label>
-                                <input type="text" className="form-control"
+                                <input type="text" className="form-control" name="name"
                                     value={planetData.name}
-                                    onChange={e => setPlanetData(p => ({ ...p, name: e.target.value }))}
+                                    onChange={e => dataValidator(e.target)}
                                 />
                             </div>
                             <div className="mb-3 states-cb">
