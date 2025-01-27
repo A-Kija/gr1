@@ -42,7 +42,9 @@ export default function Create({ setStoreData, createData, addMessage }) {
     }
 
     const dataValidator = target => {
-        const { name, value } = target;
+        let { name, value } = target;
+
+        console.log(name, value);
 
         // Name has numbers?
         if (name === 'name' && /\d/.test(value)) {
@@ -52,8 +54,19 @@ export default function Create({ setStoreData, createData, addMessage }) {
             );
             return;
         }
+        
+        // Sanitize Size as a number?
+        if (name === 'size') {
+            const beforeLength = value.length;
+            value = value.replace(/[^\d\.]/g, '');
+            if (beforeLength !== value.length) {
+                addMessage(
+                    { type: 'danger', title: 'Invalid size', text: 'Size must be a number.' }
+                );
+            }
+        }
 
-        console.log(name, value);
+        
 
         setPlanetData(p => ({ ...p, [name]: value }));
     }
@@ -92,9 +105,9 @@ export default function Create({ setStoreData, createData, addMessage }) {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Planet size km</label>
-                                <input type="text" className="form-control"
+                                <input type="text" className="form-control" name="size"
                                     value={planetData.size}
-                                    onChange={e => setPlanetData(p => ({ ...p, size: e.target.value }))}
+                                    onChange={e => dataValidator(e.target)}
                                 />
                             </div>
                             <div className="mb-3 satellites">
