@@ -8,9 +8,9 @@
 
 import { useEffect, useState } from 'react';
 
-function Counter() {
+function Counter({ count, setCount }) {
 
-    const [count, setCount] = useState(0);
+
     const [count2, setCount2] = useState(0);
 
 
@@ -31,15 +31,19 @@ function Counter() {
     }
 
     return (
-        <div className="counter">
-            <h2>Counter: {count}</h2>
+        <fieldset className="counter" style={{ 
+            border: '1px solid white', 
+            padding: '30px', 
+            margin: '30px' 
+            }}>
+            <legend>Counter</legend>
             <h2>Counter X 2: {count2}</h2>
             <div style={{ display: 'flex' }}>
-                <button class="blue" onClick={add1}>+1</button>
-                <button class="red" onClick={reset}>Reset</button>
-                <button class="green" onClick={rem1}>-1</button>
+                <button className="blue" onClick={add1}>+1</button>
+                <button className="red" onClick={reset}>Reset</button>
+                <button className="green" onClick={rem1}>-1</button>
             </div>
-        </div>
+        </fieldset>
     );
 }
 
