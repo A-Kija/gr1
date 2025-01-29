@@ -2,6 +2,7 @@ import { useReducer, useState } from 'react';
 import './app.css';
 import './buttons.scss';
 import countReducer from './Reducers/countReducer';
+import NiceCounter from './Components/056/NiceCounter';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
     return (
         <div className="app">
             <header className="app-header">
+                <NiceCounter />
                 <h2>Counter: {count}</h2>
                 <div>
                     <button className="yellow" onClick={add1}>+1</button>
