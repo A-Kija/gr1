@@ -1,10 +1,7 @@
 import { useReducer, useState } from 'react';
-import './app.css';
-import './buttons.scss';
-import countReducer from './Reducers/countReducer';
+import countReducer from '../../Reducers/countReducer';
 
-
-function App() {
+function NiceCounter() {
 
     const [count, dispachCount] = useReducer(countReducer, 0);
     const [addInput, setAddInput] = useState(0);
@@ -74,7 +71,4 @@ function App() {
     );
 }
 
-export default App;
-
-//1. Patobulinti kodą taip, kad būtų galima atimti vienetą nuo skaičiaus.
-//2. Patobulinti kodą taip, kad būtų galima esamą skaičių padauginti iš bet kokio skaičiaus.
+export default NiceCounter;
