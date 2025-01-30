@@ -8,22 +8,22 @@ export default function niceCountReducer(state, action) {
     switch (action.type) {
 
         case type.ADD1:
-            newState = state + 1;
+            newState = {value: state.value + 1};
             break;
         case type.REM1:
-            newState = state - 1;
+            newState = {value: state.value - 1};
             break;
         case type.ADD:
-            newState = state + action.payload;
+            newState = {value: state.value + action.payload};
             break;
         case type.MULTI:
-            newState = state * action.payload;
+            newState = {value: state.value * action.payload};
             break;
         case type.RESET:
-            newState = 0;
+            newState = {value: 0};
             break;
         case type.ADD5:
-            newState = state + 5;
+            newState = {value: state.value + 5};
             break;
         default:
             newState = state;

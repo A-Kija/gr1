@@ -4,17 +4,17 @@ import * as action from '../../Actions/niceActions';
 
 function NiceCounter() {
 
-    const [count, dispachCount] = useReducer(countReducer, 0);
+    const [count, dispachCount] = useReducer(countReducer, {value: 0});
     const [addInput, setAddInput] = useState(0);
     const [multiInput, setMultiInput] = useState(0);
 
     useEffect(_ => {
-        count === 0 && (setAddInput(0) || setMultiInput(0)); // mandras būdas nustatyti abu input laukus į 0, bet nereikėtų taip mandravot
+        count.value === 0 && (setAddInput(0) || setMultiInput(0)); // mandras būdas nustatyti abu input laukus į 0, bet nereikėtų taip mandravot
     }, [count]);
 
     return (
         <>
-            <h2>Nice Counter: {count}</h2>
+            <h2>Nice Counter: {count.value}</h2>
             <div>
                 <button className="yellow" onClick={_ => dispachCount(action.add1())}>+1</button>
                 <button className="blue" onClick={_ => dispachCount(action.rem1())}>-1</button>
