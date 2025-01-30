@@ -308,3 +308,32 @@ input[type="range"]:disabled::-moz-range-thumb {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.top-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+.top-menu ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.top-menu ul li {
+  margin: 0 10px;
+}
+
+.top-menu ul li a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s;
+}
+
+.top-menu ul li a:hover {
+  color:#f07167
+}

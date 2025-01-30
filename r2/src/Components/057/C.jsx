@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { CountContext } from '../../App';
+import { CountContext, CountContext2 } from '../../App057';
 
-export default function C({count}) {
+export default function C({ count }) {
 
     const count2 = useContext(CountContext);
+    const { count3, count4 } = useContext(CountContext2);
 
 
     return (
@@ -11,7 +12,8 @@ export default function C({count}) {
             <h2>Component C</h2>
             <span>{count}</span>
             <span>{count2}</span>
+            <span>{count3}</span>
+            <span>{count4}</span>
         </div>
     );
-
 }
