@@ -283,3 +283,28 @@ input[type="range"]:active::-moz-range-progress {
 input[type="range"]:disabled::-moz-range-thumb {
   cursor: not-allowed;
 }
+
+
+
+.drill-bin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ef233c;
+}
+
+.drill-bin h2 {
+  color: #ef233c;
+  margin: 0;
+  font-weight: 100;
+}
+
+.flex-bin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}

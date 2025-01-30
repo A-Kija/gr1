@@ -1,76 +1,30 @@
-import { useReducer, useState } from 'react';
+import { createContext, useState } from 'react';
 import './app.css';
 import './buttons.scss';
-import countReducer from './Reducers/countReducer';
-import NiceCounter from './Components/056/NiceCounter';
+import A from './Components/057/A';
+
+
+export const CountContext = createContext();
 
 
 function App() {
 
-    const [count, dispachCount] = useReducer(countReducer, 0);
-    const [addInput, setAddInput] = useState(0);
-    const [multiInput, setMultiInput] = useState(0);
-
-    const add1 = _ => {
-        const action = {
-            type: 'addOne' // nurodo ką daryti su state
-        };
-        dispachCount(action);
-    }
-
-    const rem1 = _ => {
-        const action = {
-            type: 'remOne' // nurodo ką daryti su state
-        };
-        dispachCount(action);
-    }
-
-    const add = _ => {
-        const action = {
-            type: 'add',
-            payload: parseInt(addInput),
-        };
-        dispachCount(action);
-    }
-
-    const multi = _ => {
-        const action = {
-            type: 'multi',
-            payload: parseInt(multiInput),
-        };
-        dispachCount(action);
-    }
-
+    const [count, setCount] = useState(0);
+    const [count2, setCount2] = useState(0);
 
     return (
         <div className="app">
             <header className="app-header">
-                <NiceCounter />
-                <h2>Counter: {count}</h2>
-                <div>
-                    <button className="yellow" onClick={add1}>+1</button>
-                    <button className="blue" onClick={rem1}>-1</button>
-                    <button className="green" onClick={add}>Add</button>
-                    <input
-                        type="number"
-                        onChange={e => setAddInput(e.target.value)}
-                        value={addInput}
-                        style={{
-                            width: '50px',
-                            height: '38px',
-                            margin: '10px 10px 0 10px',
-                        }} />
-                    <button className="green" onClick={multi}>Multi</button>
-                    <input
-                        type="number"
-                        onChange={e => setMultiInput(e.target.value)}
-                        value={multiInput}
-                        style={{
-                            width: '50px',
-                            height: '38px',
-                            margin: '10px 10px 0 10px',
-                        }} />
+
+                <button onClick={_ => setCount(c => c + 1)}>+1 (c1)</button>
+                <button onClick={_ => setCount2(c => c + 1)}>+1 (c2)</button>
+
+                <div className="flex-bin">
+                    <CountContext.Provider value={count2}>
+                        <A count={count} />
+                    </CountContext.Provider>
                 </div>
+
             </header>
         </div>
     );
@@ -78,5 +32,5 @@ function App() {
 
 export default App;
 
-//1. Patobulinti kodą taip, kad būtų galima atimti vienetą nuo skaičiaus.
-//2. Patobulinti kodą taip, kad būtų galima esamą skaičių padauginti iš bet kokio skaičiaus.
+
+// 1. count2 perduoti iš App.jsx į B.jsx naudojant useContext
