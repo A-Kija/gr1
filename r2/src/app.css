@@ -332,8 +332,18 @@ input[type="range"]:disabled::-moz-range-thumb {
   text-decoration: none;
   color: white;
   transition: all 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+.top-menu ul li a.active {
+  border-bottom: 1px solid #f07167;
 }
 
 .top-menu ul li a:hover {
   color:#f07167
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
