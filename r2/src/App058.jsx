@@ -3,10 +3,10 @@ import './app.css';
 import './buttons.scss';
 
 
-import { Router } from './Components/059/Router';
-import Main from './Components/059/Main';
-import Nav from './Components/059/Nav';
-import Wrapper from './Components/059/Wrapper';
+import { Router } from './Components/058/Router';
+import Main from './Components/058/Main';
+import Nav from './Components/058/Nav';
+import Wrapper from './Components/058/Wrapper';
 
 
 
