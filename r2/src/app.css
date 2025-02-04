@@ -315,6 +315,8 @@ input[type="range"]:disabled::-moz-range-thumb {
   align-items: center;
   position: fixed;
   top: 0;
+  width: 100%;
+
 }
 .top-menu ul {
   display: flex;
@@ -346,4 +348,19 @@ input[type="range"]:disabled::-moz-range-thumb {
 a {
   color: white;
   text-decoration: none;
+}
+
+
+
+.top-menu .login {
+  display: flex;
+  position: absolute;
+  right: 0;
+  padding: 10px 20px 0 20px;
+
+}
+
+.top-menu .login a {
+  margin: 0 10px;
+  font-size: 18px;
 }

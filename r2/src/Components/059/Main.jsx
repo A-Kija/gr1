@@ -3,6 +3,7 @@ import Contacts from './Contacts';
 import About from './About';
 import Home from './Home';
 import Product from './Product';
+import Login from './Login';
 import { useContext } from 'react';
 import RouterContext from './Router';
 
@@ -18,6 +19,7 @@ export default function Main() {
         ]},
         about: {c: <About />, title: 'About', params: 0},
         product: {c: <Product />, title: 'Product', params: 2},
+        login: {c: <Login />, title: 'Login', params: 0},
         '': {c: <Home />, title: 'Home', params: 0},
     };
 
