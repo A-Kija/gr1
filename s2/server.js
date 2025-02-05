@@ -4,13 +4,19 @@ const mysql = require('mysql');
 const app = express();
 const cors = require('cors');
 const md5 = require('md5'); // senas būdas, dabar naudojamas bcrypt
+// cookie parser
+const cookieParser = require('cookie-parser');
 
 const port = 3333;
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
 app.use(cors(
     {
-        origin: 'http://localhost:3000'
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST'],
+        credentials: true
     }
 ));
 
@@ -79,6 +85,36 @@ app.post('/login', (req, res) => {
             });
         }
     });
+});
+
+app.get('/isauth', (req, res) => {
+
+    setTimeout(_ => {
+
+
+
+        const token = req.cookies.token || '';
+        const sql = `
+        SELECT * 
+        FROM sessions 
+        WHERE code = ?
+    `;
+        con.query(sql, [token], (err, result) => {
+            if (err) {
+                throw err;
+            }
+            if (result.length === 0) {
+                res.json({
+                    auth: false
+                });
+            } else {
+                res.json({
+                    auth: true
+                });
+            }
+        });
+
+    }, 2000);
 });
 
 

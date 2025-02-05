@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "Users Server",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "md5": "^2.3.0",
