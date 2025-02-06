@@ -7,7 +7,7 @@ import Redirect  from './Redirect';
 const AuthContext = createContext();
 const URL = 'http://localhost:3333';
 
-const redirectAfterLogin = 'http://localhost:3000';
+const redirectAfterLogin = 'http://localhost:3000/#';
 const loginUrl = 'http://localhost:3000/#login';
 
 
@@ -37,6 +37,23 @@ export const Auth = ({ children }) => {
 
         }
     };
+
+    const logout = _ => {
+        axios.post(`${URL}/logout`, {}, { withCredentials: true })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.success) {
+                    setUser({
+                        name: 'Guest',
+                        role: 'guest'
+                    });
+                    window.location.replace(redirectAfterLogin);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     useEffect(_ => {
         setIsAuth(false);
@@ -87,8 +104,10 @@ export const Auth = ({ children }) => {
                         text: res.data.message.text,
                         color: res.data.message.color
                     });
+                    setUser(res.data.user);
                     setTimeout(_ => {
                         window.location.replace(redirectAfterLogin);
+                        setAuthMessage(null);
                     }, 1000);
                 }
             })
@@ -102,7 +121,8 @@ export const Auth = ({ children }) => {
         <AuthContext.Provider value={{
             setLoginData,
             authMessage,
-            user
+            user,
+            logout
         }}>
             {isAuthCheck(children)}
         </AuthContext.Provider>

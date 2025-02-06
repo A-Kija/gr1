@@ -43,6 +43,7 @@ app.post('/login', (req, res) => {
     FROM users 
     WHERE name = ? AND password = ?
     `;
+    let user;
     con.query(sql, [username, md5(password)], (err, result) => {
         if (err) {
             throw err;
@@ -56,6 +57,7 @@ app.post('/login', (req, res) => {
                 }
             });
         } else {
+            user = result[0];
             // 1 random session token
             const token = md5(Math.random());
             // 2 save token to db
@@ -74,17 +76,46 @@ app.post('/login', (req, res) => {
                     maxAge: 1000 * 60 * 60 * 24 * 7
                 });
 
-                // 4 response
+                // 4 get user from db result
+                delete user.password;
+
+                // 5 response
                 res.json({
                     success: true,
                     message: {
                         text: 'Prisijungta sėkmingai!',
                         color: 'green'
-                    }
+                    },
+                    user
                 });
             });
         }
     });
+});
+
+app.post('/logout', (req, res) => {
+
+    setTimeout(_ => {
+
+        const token = req.cookies.token || '';
+        const sql = `
+    DELETE 
+    FROM sessions 
+    WHERE code = ?
+    `;
+        con.query(sql, [token], (err, result) => {
+            if (err) {
+                throw err;
+            }
+            res.clearCookie('token');
+            res.json({
+                success: true
+            });
+        });
+
+    }, 2000);
+
+
 });
 
 app.get('/isauth', (req, res) => {

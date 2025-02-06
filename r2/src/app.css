@@ -360,7 +360,14 @@ a {
 
 }
 
+.top-menu .login b,
+.top-menu .login span,
 .top-menu .login a {
   margin: 0 10px;
   font-size: 18px;
+}
+
+.top-menu .login span {
+  text-decoration: underline;
+  cursor: pointer;
 }

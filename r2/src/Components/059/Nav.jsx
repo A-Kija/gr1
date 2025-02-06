@@ -1,12 +1,23 @@
 import Link from './Link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import RouterContext from './Router';
 import AuthContext from './Auth';
 
 export default function Nav() {
 
     const { page } = useContext(RouterContext);
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+
+    const [isLogouting, setIsLogouting] = useState(false);
+
+    const doLogout = _ => {
+        setIsLogouting(true);
+        logout();
+    }
+
+    useEffect(_ => {
+        setIsLogouting(false);
+    }, [user]);
 
     const noMenuPages = ['login'];
 
@@ -25,9 +36,17 @@ export default function Nav() {
             </ul>
             <div className="login">
                 {
-                    user
-                        ? <span>{user.name}</span>
-                        : <Link href="login">Login</Link>
+                    user && isLogouting === false
+                        ?
+                        user.role === 'guest'
+                            ? <Link href="login">Login</Link>
+                            : <><b>{user.name}</b><span onClick={doLogout}>logout</span></>
+                        : null
+                }
+                {
+                    isLogouting
+                        ? <b>Logging out...</b>
+                        : null
                 }
             </div>
         </nav>
