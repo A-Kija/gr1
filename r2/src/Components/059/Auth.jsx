@@ -1,54 +1,71 @@
-import { createContext, useEffect, useState, useContext, use } from 'react';
+import { createContext, useEffect, useState, useContext, useRef } from 'react';
 import RouterContext from './Router';
 import axios from 'axios';
 import Wrapper from './Wrapper';
+import Redirect  from './Redirect';
 
 const AuthContext = createContext();
 const URL = 'http://localhost:3333';
 
 const redirectAfterLogin = 'http://localhost:3000';
-
+const loginUrl = 'http://localhost:3000/#login';
 
 
 export const Auth = ({ children }) => {
 
-    const guardedRoutes = ['shop', 'about'];
+    const guardedRoutes = useRef(['shop', 'about']);
 
     const { page } = useContext(RouterContext);
 
     const [loginData, setLoginData] = useState(null);
     const [authMessage, setAuthMessage] = useState(null);
+    const [user, setUser] = useState(null);
 
     const [isAuth, setIsAuth] = useState(false);
 
-    const isAuthCheck = _ => {
-        if (!guardedRoutes.includes(page)) {
-            return true;
+    const isAuthCheck = c => {
+        if (!guardedRoutes.current.includes(page)) {
+            return c;
         } else {
-            if (isAuth) {
-                return true;
+            if (!user) {
+                return <Wrapper><div>Loading</div></Wrapper>;
+            } else if (user.role === 'guest') {
+                return <Wrapper><Redirect to={loginUrl} /></Wrapper>;
             } else {
-                return false;
+                return c;
             }
+
         }
     };
 
     useEffect(_ => {
         setIsAuth(false);
+        // if (!guardedRoutes.current.includes(page)) {
+        //     return;
+        // }
+        if (user) {
+            setIsAuth(user.role === 'guest' ? false : true);
+            return;
+        }
         axios.get(`${URL}/isauth`, { withCredentials: true })
             .then(res => {
                 if (res.data.auth) {
                     setIsAuth(true);
+                    setUser(res.data.user);
                 } else {
                     setIsAuth(false);
-                    window.location.replace(`http://localhost:3000/#login`);
+                    setUser({
+                        name: 'Guest',
+                        role: 'guest'
+                    });
+                    guardedRoutes.current.includes(page) && window.location.replace(`http://localhost:3000/#login`);
                 }
             })
             .catch(err => {
                 console.log(err);
                 setIsAuth(false);
             });
-    }, [page]);
+    }, [page, guardedRoutes, user]);
 
 
     useEffect(_ => {
@@ -84,9 +101,10 @@ export const Auth = ({ children }) => {
     return (
         <AuthContext.Provider value={{
             setLoginData,
-            authMessage
+            authMessage,
+            user
         }}>
-            {isAuthCheck() ? children : <Wrapper><div>Loading...</div></Wrapper>}
+            {isAuthCheck(children)}
         </AuthContext.Provider>
     );
 

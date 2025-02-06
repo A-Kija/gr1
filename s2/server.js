@@ -91,8 +91,6 @@ app.get('/isauth', (req, res) => {
 
     setTimeout(_ => {
 
-
-
         const token = req.cookies.token || '';
         const sql = `
         SELECT * 
@@ -108,8 +106,21 @@ app.get('/isauth', (req, res) => {
                     auth: false
                 });
             } else {
-                res.json({
-                    auth: true
+                // get user from db
+                const sql = `
+                SELECT *
+                FROM users
+                WHERE id = ?
+                `;
+                con.query(sql, [result[0].user_id], (err, result) => {
+                    if (err) {
+                        throw err;
+                    }
+                    delete result[0].password;
+                    res.json({
+                        auth: true,
+                        user: result[0]
+                    });
                 });
             }
         });

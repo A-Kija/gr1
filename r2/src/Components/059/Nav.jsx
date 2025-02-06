@@ -1,10 +1,12 @@
 import Link from './Link';
 import { useContext } from 'react';
 import RouterContext from './Router';
+import AuthContext from './Auth';
 
 export default function Nav() {
 
     const { page } = useContext(RouterContext);
+    const { user } = useContext(AuthContext);
 
     const noMenuPages = ['login'];
 
@@ -22,7 +24,11 @@ export default function Nav() {
                 <li><Link href="about">About</Link></li>
             </ul>
             <div className="login">
-                <Link href="login">Login</Link>
+                {
+                    user
+                        ? <span>{user.name}</span>
+                        : <Link href="login">Login</Link>
+                }
             </div>
         </nav>
     );
