@@ -10,6 +10,8 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static('public'));
 app.use(cors());
 
+const url = 'http://localhost:3333/';
+
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -25,27 +27,47 @@ con.connect(err => {
     console.log('Prisijungta prie duomenų bazės!');
 });
 
+app.get('/api/images', (req, res) => {
+    
+    const sql = 'SELECT * FROM imgs ORDER BY id DESC';
+
+    con.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        }
+
+        result = result.map(image => {
+            image.url = url + image.url;
+            return image;
+        });
+
+        res.json(result);
+    });
+
+});
+
+
 app.post('/api/images', (req, res) => {
 
-    let image = req.body.image; // base64 encoded image
+     // base64 encoded image
+    let image = req.body.image;
 
-    let imageType = image.split(';')[0].split('/')[1];
+    const imageType = image.split(';')[0].split('/')[1];
 
     // remove header
     image = image.replace(/^data:image\/\w+;base64,/, '');
 
     // random image name
-    let imageName = Math.random().toString(36).substring(7) + '.' + imageType;
+    const imageName = Math.random().toString(36).substring(7) + '.' + imageType;
 
-    // create buffer
-    let buffer = new Buffer(image, 'base64');
+    // create buffer convert base64 to image
+    const buffer = Buffer.from(image, 'base64');
 
     // save image with fs sync
     fs.writeFileSync('public/' + imageName, buffer);
 
-
     // save image to db
-    let sql = `
+    const sql = `
     INSERT INTO imgs
     (url)
     VALUES ('${imageName}')`;
@@ -54,7 +76,7 @@ app.post('/api/images', (req, res) => {
         if (err) {
             throw err;
         }
-        res.send('ok');
+        res.json({message: 'success'});
     });
 
 });

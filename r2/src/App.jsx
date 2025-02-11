@@ -2,6 +2,7 @@ import './image-crud.scss';
 import './buttons.scss';
 import Create from './Components/crud/Create';
 import { DataProvider } from './Components/crud/Data';
+import List from './Components/crud/List';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
                         <Create />
                     </div>
                     <div className="col-8">
-                        listas
+                        <List />
                     </div>
                 </div>
             </div>
