@@ -1,0 +1,16 @@
+{
+  "name": "breddit",
+  "version": "0.1.1",
+  "description": "Forum about all kind of B",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node ./seeder/index.js"
+  },
+  "type": "module",
+  "keywords": [
+    "reddit",
+    "breddit"
+  ],
+  "author": "Mr. B",
+  "license": "ISC"
+}
