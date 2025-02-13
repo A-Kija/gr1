@@ -28,7 +28,7 @@ posts.forEach(post => {
     }
     users.forEach(user => {
         if (!post.likes.l.includes(user.id)) {
-          rand(0, 2) || (post.likes.d.push(user.id));
+            rand(0, 2) || (post.likes.d.push(user.id));
         }
     });
 });
@@ -76,6 +76,29 @@ posts.forEach(post => {
     }
 });
 
+// add likes array to comments
+comments.forEach(comment => {
+    comment.likes = { l: [], d: [] };
+    const likesCount = rand(0, usersCount);
+    for (let i = 0; i < likesCount; i++) {
+        let likeId;
+        do {
+            likeId = users[rand(0, usersCount - 1)].id;
+        } while (comment.likes.l.includes(likeId));
+        comment.likes.l.push(likeId);
+    }
+    users.forEach(user => {
+        if (!comment.likes.l.includes(user.id)) {
+            rand(0, 2) || (comment.likes.d.push(user.id));
+        }
+    });
+});
+
+// comments likes to JSON
+comments.forEach(comment => {
+    comment.likes = JSON.stringify(comment.likes);
+});
+
 // add comments count to posts
 posts.forEach(post => {
     post.comments = postCommentsCount.get(post.id);
@@ -119,18 +142,6 @@ con.query(sql, (err) => {
 });
 
 sql = `
-    INSERT INTO authors
-    (id, name, avatar, role, karma)
-    VALUES ?
-`;
-
-con.query(sql, [users.map(user => [user.id, user.name, user.avatar, user.role, user.karma])], (err) => {
-    if (err) throw err;
-    console.log('Duomenys įterpti į lentelę authors!');
-});
-
-
-sql = `
     CREATE TABLE posts (
     id int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     author_id int(10) UNSIGNED NOT NULL,
@@ -149,6 +160,56 @@ con.query(sql, (err) => {
 });
 
 sql = `
+    CREATE TABLE comments (
+    id int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    post_id int(10) UNSIGNED DEFAULT NULL,
+    comment_id int(10) UNSIGNED DEFAULT NULL,
+    content text NOT NULL,
+    author_id int(10) UNSIGNED NOT NULL,
+    likes text NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ `;
+
+con.query(sql, (err) => {
+    if (err) throw err;
+    console.log('Lentelė comments sukurta!');
+});
+
+sql = `
+    ALTER TABLE comments
+    ADD CONSTRAINT comments_ibfk_1 FOREIGN KEY (author_id) REFERENCES authors (id),
+    ADD CONSTRAINT comments_ibfk_2 FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE CASCADE,
+    ADD CONSTRAINT comments_ibfk_3 FOREIGN KEY (comment_id) REFERENCES comments (id) ON DELETE CASCADE;
+`;
+
+con.query(sql, (err) => {
+    if (err) throw err;
+    console.log('Sukurti raktai tarp lentelių!');
+});
+
+sql = `
+    ALTER TABLE posts
+    ADD CONSTRAINT posts_ibfk_1 FOREIGN KEY (author_id) REFERENCES authors (id);
+`;
+
+con.query(sql, (err) => {
+    if (err) throw err;
+    console.log('Sukurti raktai tarp lentelių!');
+});
+
+sql = `
+    INSERT INTO authors
+    (id, name, avatar, role, karma)
+    VALUES ?
+`;
+
+con.query(sql, [users.map(user => [user.id, user.name, user.avatar, user.role, user.karma])], (err) => {
+    if (err) throw err;
+    console.log('Duomenys įterpti į lentelę authors!');
+});
+
+
+sql = `
     INSERT INTO posts
     (id, author_id, content, image_url, likes, title, date, comments)
     VALUES ?
@@ -160,7 +221,17 @@ con.query(sql, [posts.map(post => [post.id, post.author_id, post.content, post.i
 });
 
 
-console.log(faker.word.words({ count: { min: 5, max: 100 } }));
+sql = `
+    INSERT INTO comments
+    (id, post_id, comment_id, content, author_id, likes)
+    VALUES ?
+`;
+
+con.query(sql, [comments.map(comment => [comment.id, comment.post_id, comment.comment_id, comment.content, comment.author_id, comment.likes])], (err) => {
+    if (err) throw err;
+    console.log('Duomenys įterpti į lentelę comments!');
+});
+
 
 
 con.end(err => {
