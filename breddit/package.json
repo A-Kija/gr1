@@ -4,7 +4,9 @@
   "description": "Forum about all kind of B",
   "main": "index.js",
   "scripts": {
-    "seed": "node ./seeder/index.js"
+    "seed": "node ./seeder/index.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "type": "module",
   "keywords": [
@@ -15,6 +17,31 @@
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^9.5.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "axios": "^1.7.9",
+    "cra-template": "1.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.83.1",
+    "uuid": "^11.0.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
