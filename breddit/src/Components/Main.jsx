@@ -13,8 +13,7 @@ export default function Main() {
 
     const route = _ => {
 
-        console.log(page);
-
+ 
         return routes?.[page]?.c ?? <h1>404</h1>; 
     };
 

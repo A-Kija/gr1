@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import DataContext from '../Contexts/Data';
+
 export default function Home() {
+
+    const { posts } = useContext(DataContext);
 
     return (
         <section className="home">
