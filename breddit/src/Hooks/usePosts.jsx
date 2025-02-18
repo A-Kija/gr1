@@ -18,7 +18,10 @@ export default function usePosts(page) {
         }
         axios.get(serverUrl + 'posts')
             .then(response => {
-                dispachPosts({ type: A.LOAD_ALL_POSTS, data: response.data });
+                dispachPosts({ 
+                    type: A.LOAD_ALL_POSTS, 
+                    payload: response.data 
+                });
             })
             .catch(error => {
                 console.error(error);
