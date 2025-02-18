@@ -1,5 +1,6 @@
 @use 'colors.scss' as C;
 @use 'vars.scss' as V;
+@use 'post.scss' as P;
 
 *, *::before, *::after {
     box-sizing: border-box;

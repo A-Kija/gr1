@@ -24,8 +24,12 @@ app.get(url + 'posts', (req, res) => {
     setTimeout(_ => {
 
         const sql = `
-            SELECT * FROM posts
+            SELECT p.id, p.title, p.content, p.date, p.image_url, a.avatar, p.likes 
+            FROM posts AS p
+            INNER JOIN authors AS a
+            ON p.author_id = a.id
         `;
+        
 
         con.query(sql, (err, result) => {
             if (err) {

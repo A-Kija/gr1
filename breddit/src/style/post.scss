@@ -1,0 +1,25 @@
+@use 'sass:color';
+@use 'vars.scss' as V;
+@use 'colors.scss' as C;
+
+
+.post {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .post-image {
+        width: 100%;
+        height: 600px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    }
+}
