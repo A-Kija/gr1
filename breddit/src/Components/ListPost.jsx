@@ -3,7 +3,7 @@ export default function ListPost({post}) {
     return (
         <div className="post">
             <div className="post-top">
-                <span className="author">{post.avatar}</span>
+                <span className="author"><img src={post.avatar} alt="avatar" style={{width: '30px'}} /></span>
                 <span className="date">{new Date(post.date).toLocaleDateString('lt-LT')}</span>
             </div>
             <h2>{post.title}</h2>
@@ -13,11 +13,11 @@ export default function ListPost({post}) {
             <p>{post.content}</p>
             <div className="post-bottom">
                 <span className="likes">
-                    <i className="up"></i>
+                    <i className="up">⇧</i>
                         {post.likes.l.length - post.likes.d.length}
-                    <i className="down"></i>
+                    <i className="down">⇩</i>
                 </span>
-                <span className="comment">Comment</span>
+                <span className="comment">Comments: {post.comments}</span>
             </div>
         </div>
     );
