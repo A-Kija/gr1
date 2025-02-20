@@ -1,42 +1,41 @@
 import './buttons.scss';
 import './App.css';
-import Gate from './Componets/068/Gate.jsx';
+import SimpleContext from './Componets/069/SimpleContext';
+import Number from './Componets/069/Number';
+import Number2 from './Componets/069/Number2';
 import { useState } from 'react';
-import A from './Componets/068/A.jsx';
-import B from './Componets/068/B.jsx';
-import AB from './Componets/068/AB.jsx';
+import GateContext, { Gate } from './Componets/069/GateContext';
+import Number3 from './Componets/069/Number3';
+
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(true);
-  const [aOrB, setAOrB] = useState(true);
-
+  const [number, setNumber] = useState(42);
 
   return (
     <>
 
-      <div className="container">
-
-        {/* <Gate isOpen={isOpen}>
-
-          <A />
-          <B />
-
-        </Gate> */}
-
-        <AB aOrB={aOrB}>
-
-          <A />
-          <B />
-
-        </AB>
-
-
+    <SimpleContext.Provider value={{number: number, color: 'green'}}>
+      <div>
+          Konteksto vidus
+          <Number />
+          <Number2 />
       </div>
+    </SimpleContext.Provider>
+
+    <button className="green" onClick={_ => setNumber(n => n + 1)}>ADD</button>
 
 
-      <button onClick={_ => setIsOpen(!isOpen)} className="green">Toggle</button>
-      <button onClick={_ => setAOrB(!aOrB)} className="red">Toggle A or B</button>
+    <Gate>
+      <Number3 />
+      <GateContext.Consumer>
+        {
+          ({setNumber}) => <button className="green" onClick={_ => setNumber(n => n + 1)}>ADD</button>
+        }
+      </GateContext.Consumer>
+    </Gate>
+
+ 
 
 
     </>
@@ -46,5 +45,3 @@ function App() {
 export default App
 
 
-// Sukurt komponetą AB kuris turėtų vaikus A ir B. AB turi būti atskirame faile.
-// AB turi būti valdomas state, kuris leidžia rodyti A arba B vaiką vienu metu.

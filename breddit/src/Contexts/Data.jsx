@@ -8,8 +8,11 @@ export const Data = ({ children }) => {
 
     // duomenų gavimas ir Routerio konteksto. (duomenys tarp kontekstų)
     const { page, parameters } = useContext(RouterContext);
+  
     
     const { posts } = usePosts(page);
+
+    console.log('Perkraunamas Data.jsx:', page, posts);
     
     
     return (
@@ -17,6 +20,7 @@ export const Data = ({ children }) => {
             posts
         }}>
             {children}
+            {console.log('Renderinamas DATA su posts:', posts)}
         </DataContext.Provider>
     );
 }

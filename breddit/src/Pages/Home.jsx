@@ -6,6 +6,8 @@ export default function Home() {
 
     const { posts } = useContext(DataContext);
 
+    console.log('Perkraunamas Home.jsx:', posts);
+
     return (
         <section className="home">
             <div className="container">
@@ -17,6 +19,7 @@ export default function Home() {
                     <h2>loading...</h2>
                 }
             </div>
+            { console.log('Home.jsx rodo:', posts === null ? 'loading...' : posts) }
         </section>
     );
 }
