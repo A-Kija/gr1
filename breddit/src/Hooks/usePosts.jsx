@@ -12,7 +12,7 @@ export default function usePosts(page) {
 
     useEffect(_ => {
 
-        if (page !== '') {  // '' stringas simbolizuoja pagrindinį puslapį (home)
+        if (page !== '' && page !== 'home') {  // '' stringas simbolizuoja pagrindinį puslapį (home)
             return;
         }
         axios.get(serverUrl + 'posts')

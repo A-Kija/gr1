@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import Wrapper from '../Components/Wrapper';
 import Page404 from '../Components/Page404';
-
+import Home from '../Pages/Home';
 
 
 const RouterContext = createContext();
@@ -10,6 +10,11 @@ export const Router = ({ children }) => {
 
     const showComponentsList = {
         error404: <Page404 />
+    };
+
+    const routes = {
+        '': {c: <Home />, title: 'Home', params: 0},
+        'home': {c: <Home />, title: 'Home', params: 0}
     };
 
     const [page, setPage] = useState(_ => {
@@ -49,7 +54,8 @@ export const Router = ({ children }) => {
         <RouterContext.Provider value={{
             page,
             parameters,
-            setShowComponent
+            setShowComponent,
+            routes
         }}>
             {showComponent === null ? children : <Wrapper>{showComponentsList[showComponent] ?? null}</Wrapper>}
             {console.log('Renderinamas ROUTER su page:', page)}
