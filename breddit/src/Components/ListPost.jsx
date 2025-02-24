@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import DataContext from '../Contexts/Data';
+
 export default function ListPost({post}) {
+
+    const {comments, getComments} = useContext(DataContext);
 
     return (
         <div className="post">
@@ -17,7 +22,11 @@ export default function ListPost({post}) {
                         {post.likes.l.length - post.likes.d.length}
                     <i className="down">⇩</i>
                 </span>
-                <span className="comment">Comments: {post.comments}</span>
+                <span className="comment" onClick={_ => getComments(post.id, 'post')}>Comments: {post.comments}</span>
+            </div>
+            <div className="post-comments">
+                <h3>Comments</h3>
+                
             </div>
         </div>
     );

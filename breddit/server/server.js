@@ -50,7 +50,46 @@ app.get(url + 'posts', (req, res) => {
     }, 2000);
 });
 
+app.get(url + 'comments/:id/:type', (req, res) => {
+    setTimeout(_ => {
+        const id = req.params.id;
+        const type = req.params.type;
 
+        let sql = '';
+
+        sql = `
+            SELECT c.id, c.post_id, c.com_id, c.body, a.avatar, a.name AS author
+            FROM comments AS c
+            INNER JOIN authors AS a
+            ON c.author_id = a.id
+        `;
+
+        if (type === 'post') {
+            sql += `WHERE c.post_id = ?`;
+        } else if (type === 'comment') {
+            sql += `WHERE c.comment_id = ?`;
+        }
+
+        con.query(sql, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ error: err.message });
+                return;
+            }
+
+            result = result.map(comment => {
+                comment.avatar = 'data:image/svg+xml;base64,' + btoa(comment.avatar); // avataro svg kodas paverčiamas į base64
+                return comment;
+            });
+
+            res.json(result);
+        });
+
+
+
+
+    }, 2000);
+});
 
 
 
