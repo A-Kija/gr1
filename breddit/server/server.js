@@ -58,7 +58,7 @@ app.get(url + 'comments/:id/:type', (req, res) => {
         let sql = '';
 
         sql = `
-            SELECT c.id, c.post_id, c.com_id, c.body, a.avatar, a.name AS author
+            SELECT c.id, c.post_id AS postId, c.comment_id AS comId, c.content AS body
             FROM comments AS c
             INNER JOIN authors AS a
             ON c.author_id = a.id
@@ -70,23 +70,14 @@ app.get(url + 'comments/:id/:type', (req, res) => {
             sql += `WHERE c.comment_id = ?`;
         }
 
-        con.query(sql, (err, result) => {
+        con.query(sql, [id], (err, result) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({ error: err.message });
                 return;
             }
-
-            result = result.map(comment => {
-                comment.avatar = 'data:image/svg+xml;base64,' + btoa(comment.avatar); // avataro svg kodas paverčiamas į base64
-                return comment;
-            });
-
             res.json(result);
         });
-
-
-
 
     }, 2000);
 });

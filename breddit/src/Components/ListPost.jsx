@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import DataContext from '../Contexts/Data';
+import ListComment from './ListComment';
 
 export default function ListPost({post}) {
 
@@ -27,6 +28,12 @@ export default function ListPost({post}) {
             <div className="post-comments">
                 <h3>Comments</h3>
                 
+                    {
+                        comments
+                        .filter(comment => comment.postId === post.id && comment.comId === null)
+                        .map(comment => <ListComment key={comment.id} comment={comment} />)
+                    }
+
             </div>
         </div>
     );

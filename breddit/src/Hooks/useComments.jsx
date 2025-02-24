@@ -19,7 +19,18 @@ export default function useComments() {
         try {
             const response = await axios.get(serverUrl + 'comments/' + id + '/' + type);
             console.log('Ateina atsakymas iš serverio į useComments:', response.data);
-            setComments(response.data);
+            setComments(comments => {
+                const c = structuredClone(comments);
+                response.data.forEach(res => {
+                   const copy = c.find(c => c.id === res.id);
+                   if (copy) {
+                       copy.body = res.body;
+                   } else {
+                       c.push(res);
+                   }
+                });
+                return c;
+            });
         } catch (error) {
             console.error(error);
         }
