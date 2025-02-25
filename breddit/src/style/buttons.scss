@@ -3,7 +3,7 @@
 
 
 
-button {
+@mixin nice-button {
     appearance: none;
     backface-visibility: hidden;
     background-color: C.$gray;

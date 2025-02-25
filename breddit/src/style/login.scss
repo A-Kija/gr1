@@ -1,0 +1,49 @@
+@use 'buttons.scss' as B;
+@use 'colors.scss' as C;
+
+
+.login {
+    h1 {
+        font-size: 40px;
+        font-weight: bold;
+        color: C.$yellow;
+        margin: 100px 0 20px 20px;
+    }
+    .container {
+        width: 460px;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        .form-group {
+            display: flex;
+            column-gap: 10px;
+            label {
+                font-size: 20px;
+                font-weight: bold;
+                color: C.$yellow;
+                width: 100px;
+            }
+            input {
+                width: calc(100% - 120px);
+                padding: 10px;
+                font-size: 20px;
+                border-radius: 10px;
+                border: none;
+                background-color: C.$green;
+                color: white;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        button {
+            @include B.nice-button;
+        }
+
+    }
+}

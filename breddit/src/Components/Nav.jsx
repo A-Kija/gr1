@@ -1,6 +1,15 @@
 import Link from './Link';
+import { useContext } from 'react';
+import RouterContext from '../Contexts/Router';
 
 export default function Nav() {
+
+    const { page, routes } = useContext(RouterContext);
+
+    if (routes[page]?.hideNav) {
+        return null;
+    }
+
     return (
         <section className="nav">
             <div className="container">

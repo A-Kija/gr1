@@ -16,7 +16,7 @@ export const Router = ({ children }) => {
     const routes = {
         '': {c: <Home />, title: 'Home', params: 0},
         'home': {c: <Home />, title: 'Home', params: 0},
-        'login': {c: <Login />, title: 'Login', params: 0, nav: false},
+        'login': {c: <Login />, title: 'Login', params: 0, hideNav: true},
     };
 
     const [page, setPage] = useState(_ => {
@@ -49,6 +49,8 @@ export const Router = ({ children }) => {
         setShowComponent(null);
         console.log('useEffect ROUTER [page, parameters]');
     }, [page, parameters]);
+
+    
 
 
 
