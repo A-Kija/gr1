@@ -1,0 +1,45 @@
+@use 'colors.scss' as C;
+@use 'vars.scss' as V;
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+        
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        list-style: none;
+        margin: 0;
+
+        li {
+            a {
+                color: C.$yellow;
+                text-decoration: none;
+                &:hover {
+                    color: C.$green;
+                }
+            }
+        }
+    }
+
+    .auth {
+        display: flex;
+        gap: 20px;
+        a {
+            color: C.$red;
+            text-decoration: none;
+            &:hover {
+                color: C.$green;
+            }
+        }
+    }
+}

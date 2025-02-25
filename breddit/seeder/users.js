@@ -21,5 +21,9 @@ export const users = [
     { id: 29, name: 'Randy', avatar: icons.icon3, role: 'user', karma: 987 },
     { id: 30, name: 'Sally', avatar: icons.icon1, role: 'admin', karma: 0 },
     { id: 31, name: 'Tom', avatar: icons.icon2, role: 'user', karma: -54 },
-    { id: 33, name: 'Ursula', avatar: icons.icon3, role: 'user', karma: -74 }
+    { id: 33, name: 'Ursula', avatar: icons.icon3, role: 'user', karma: -74 },
+    { id: 34, name: 'Briedis', avatar: icons.icon1, role: 'admin', karma: 0 },
+    { id: 87, name: 'Bebras', avatar: icons.icon2, role: 'moderator', karma: 0 },
+    { id: 91, name: 'Barsukas', avatar: icons.icon3, role: 'user', karma: 0 }
+
 ];

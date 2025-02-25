@@ -11,7 +11,6 @@ export default function Home() {
     return (
         <section className="home">
             <div className="container">
-                <h1>postai</h1>
                 {   posts !== null 
                     ?
                     posts.map(post => <ListPost key={post.id} post={post} />)

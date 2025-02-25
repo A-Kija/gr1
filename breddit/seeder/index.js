@@ -2,6 +2,7 @@ import { users } from './users.js';
 import { posts } from './posts.js';
 import mysql from 'mysql';
 import { faker } from '@faker-js/faker';
+import md5 from 'md5';
 
 function rand(min, max) {
     const minCeiled = Math.ceil(min);
@@ -9,6 +10,11 @@ function rand(min, max) {
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 }
 const usersCount = users.length;
+
+users.forEach(user => {
+    user.password = md5('123');
+    user.email = faker.internet.email();
+});
 
 // add author_id to posts
 posts.forEach(post => {
@@ -122,9 +128,13 @@ con.query('DROP TABLE IF EXISTS comments;'), (err) => {
 con.query('DROP TABLE IF EXISTS posts;'), (err) => {
     if (err) throw err;
 }
+con.query('DROP TABLE IF EXISTS sessions;'), (err) => {
+    if (err) throw err;
+}
 con.query('DROP TABLE IF EXISTS authors;'), (err) => {
     if (err) throw err;
 }
+
 
 sql = `
     CREATE TABLE authors (
@@ -132,7 +142,9 @@ sql = `
     name varchar(100) NOT NULL,
     avatar text NOT NULL,
     role enum('moderator','user','admin','bot','gold') NOT NULL,
-    karma int(10) UNSIGNED NOT NULL
+    karma int(10) UNSIGNED NOT NULL,
+    email varchar(100) NOT NULL,
+    password char(32) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 `;
 
@@ -140,6 +152,21 @@ con.query(sql, (err) => {
     if (err) throw err;
     console.log('Lentelė authors sukurta!');
 });
+
+sql = `
+    CREATE TABLE sessions (
+    id int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    author_id int(10) UNSIGNED NOT NULL,
+    token char(32) NOT NULL,
+    expires datetime NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+`;
+
+con.query(sql, (err) => {
+    if (err) throw err;
+    console.log('Lentelė sessions sukurta!');
+});
+
 
 sql = `
     CREATE TABLE posts (
@@ -197,13 +224,26 @@ con.query(sql, (err) => {
     console.log('Sukurti raktai tarp lentelių!');
 });
 
+
+sql = `
+    ALTER TABLE sessions
+    ADD CONSTRAINT sessions_ibfk_1 FOREIGN KEY (author_id) REFERENCES authors (id);
+`;
+
+con.query(sql, (err) => {
+    if (err) throw err;
+    console.log('Sukurti raktai tarp lentelių!');
+});
+
+
+
 sql = `
     INSERT INTO authors
-    (id, name, avatar, role, karma)
+    (id, name, avatar, role, karma, email, password)
     VALUES ?
 `;
 
-con.query(sql, [users.map(user => [user.id, user.name, user.avatar, user.role, user.karma])], (err) => {
+con.query(sql, [users.map(user => [user.id, user.name, user.avatar, user.role, user.karma, user.email, user.password])], (err) => {
     if (err) throw err;
     console.log('Duomenys įterpti į lentelę authors!');
 });

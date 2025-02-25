@@ -12,7 +12,7 @@ export default function ListComment({ comment }) {
             <div className="comment-bottom">
                 <span className="likes">
                     <i className="up">⇧</i>
-                    0
+                    {comment.likes.l.length - comment.likes.d.length}
                     <i className="down">⇩</i>
                 </span>
                 <span className="comment" onClick={_=> getComments(comment.id, 'comment')}>Show comments</span>
