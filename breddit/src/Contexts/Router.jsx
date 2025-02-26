@@ -3,6 +3,7 @@ import Wrapper from '../Components/Wrapper';
 import Page404 from '../Components/Page404';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
+import Logout from '../Pages/Logout';
 
 
 const RouterContext = createContext();
@@ -17,6 +18,8 @@ export const Router = ({ children }) => {
         '': {c: <Home />, title: 'Home', params: 0},
         'home': {c: <Home />, title: 'Home', params: 0},
         'login': {c: <Login />, title: 'Login', params: 0, hideNav: true},
+        'logout': {c: <Logout/>, title: 'Logout', params: 0, hideNav: true},
+        'register': {c: null, title: 'Register', params: 0, hideNav: true},
     };
 
     const [page, setPage] = useState(_ => {

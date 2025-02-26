@@ -6,6 +6,9 @@ export default function ListPost({post}) {
 
     const {comments, getComments} = useContext(DataContext);
 
+    const upVote = _ => {};
+    const downVote = _ => {};
+
     return (
         <div className="post">
             <div className="post-top">
@@ -19,9 +22,9 @@ export default function ListPost({post}) {
             <p>{post.content}</p>
             <div className="post-bottom">
                 <span className="likes">
-                    <i className="up">⇧</i>
+                    <i className="up" onClick={upVote}>⇧</i>
                         {post.likes.l.length - post.likes.d.length}
-                    <i className="down">⇩</i>
+                    <i className="down" onClick={downVote}>⇩</i>
                 </span>
                 <span className="comment" onClick={_ => getComments(post.id, 'post')}>Comments: {post.comments}</span>
             </div>

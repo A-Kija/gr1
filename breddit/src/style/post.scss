@@ -3,6 +3,7 @@
 @use 'colors.scss' as C;
 
 
+
 .post {
     margin-top: 30px;
     display: flex;
@@ -63,7 +64,7 @@
             width: 100px;
             height: 30px;
             border-radius: 15px;
-            background-color: cadetblue;
+            background-color: C.$green;
             padding: 0 10px;
 
             i {
@@ -78,7 +79,7 @@
                 }
 
                 &.up:hover {
-                    color: C.$green;
+                    color: color.adjust(C.$green, $lightness: -20%);
                 }
             }
         }
@@ -86,7 +87,7 @@
         .comment {
             cursor: pointer;
             padding: 0 10px;
-            color: cadetblue;
+            color: C.$green;
 
             &:hover {
                 color: C.$blue;

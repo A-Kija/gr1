@@ -7,13 +7,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 80px;
+
     ul {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 20px;
         padding: 10px;
-        
+
         color: white;
         font-size: 20px;
         font-weight: bold;
@@ -25,6 +27,7 @@ nav {
             a {
                 color: C.$yellow;
                 text-decoration: none;
+
                 &:hover {
                     color: C.$green;
                 }
@@ -35,11 +38,39 @@ nav {
     .auth {
         display: flex;
         gap: 20px;
+        align-items: center;
+
         a {
             color: C.$red;
             text-decoration: none;
+
             &:hover {
                 color: C.$green;
+            }
+        }
+
+        &.user {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            h3 {
+                color: C.$yellow;
+                font-weight: bold;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: C.$green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 30px;
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
             }
         }
     }

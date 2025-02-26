@@ -21,8 +21,7 @@ export default function useLogin() {
 
         axios.post(serverUrl + 'login', loginData, { withCredentials: true })
             .then(res => {
-                console.log(res.data);
-                setUser(res.data);
+                setUser(res.data.user);
                 redirectAfterLogin();
             })
             .catch(error => {

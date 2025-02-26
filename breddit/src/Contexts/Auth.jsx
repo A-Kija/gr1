@@ -12,6 +12,7 @@ export const Auth = ({ children }) => {
     useEffect(_ => {
         axios.get(serverUrl + 'auth', { withCredentials: true })
             .then(res => {
+                
                 setUser(res.data);
             })
             .catch(error => {
