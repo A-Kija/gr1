@@ -30,3 +30,14 @@ section {
         padding: 0 V.$p;
     }
 }
+
+.screen-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 20px;
+    font-weight: 100;
+    color: C.$white;
+    margin: 0;
+}

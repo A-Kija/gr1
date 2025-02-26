@@ -1,11 +1,17 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { serverUrl } from '../Constants/main';
+import AuthContext from '../Contexts/Auth';
 
 export default function useLogin() {
 
+    const redirectAfterLogin = _ => {
+        window.location.hash = '#';
+    }
 
     const [loginData, setLoginData] = useState(null);
+
+    const { setUser } = useContext(AuthContext);
 
     useEffect(_ => {
 
@@ -13,9 +19,11 @@ export default function useLogin() {
             return;
         }
 
-        axios.post(serverUrl + 'login', loginData, {withCredentials: true})
+        axios.post(serverUrl + 'login', loginData, { withCredentials: true })
             .then(res => {
-                console.log(res.data)
+                console.log(res.data);
+                setUser(res.data);
+                redirectAfterLogin();
             })
             .catch(error => {
                 console.error(error);
