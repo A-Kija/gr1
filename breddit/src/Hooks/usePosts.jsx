@@ -30,6 +30,6 @@ export default function usePosts(page) {
     }, [page]);
 
 
-    return { posts };
+    return { posts, dispachPosts };
 
 }

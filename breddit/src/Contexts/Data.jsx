@@ -11,7 +11,7 @@ export const Data = ({ children }) => {
     const { page, parameters } = useContext(RouterContext);
 
 
-    const { posts } = usePosts(page);
+    const { posts, dispachPosts } = usePosts(page);
 
     const { comments, getComments } = useComments();
 
@@ -22,7 +22,8 @@ export const Data = ({ children }) => {
         <DataContext.Provider value={{
             posts,
             comments, 
-            getComments
+            getComments,
+            dispachPosts
         }}>
             {children}
             {console.log('Renderinamas DATA su posts:', posts)}
