@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'vars.scss' as V;
 @use 'colors.scss' as C;
+@use 'buttons.scss' as Button;
 
 
 
@@ -142,5 +143,32 @@
     
     .more-comments {
         margin-left: 50px;
+    }
+
+    .write-comment {
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        div {
+            font-size: 18px;
+            font-weight: 700;
+            color: C.$blue;
+            margin-bottom: 10px;
+        }
+        textarea {
+            outline: none;
+            height: 120px;
+            max-width: 500px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            @include Button.nice-button;
+        }
+        button {
+            margin: 20px 0 0 0;
+            width: 150px;
+        }
     }
 }

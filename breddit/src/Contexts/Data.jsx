@@ -3,6 +3,7 @@ import usePosts from '../Hooks/usePosts';
 import useComments from '../Hooks/useComments';
 import RouterContext from './Router';
 
+
 const DataContext = createContext();
 
 export const Data = ({ children }) => {
@@ -13,7 +14,8 @@ export const Data = ({ children }) => {
 
     const { posts, dispachPosts } = usePosts(page);
 
-    const { comments, getComments } = useComments();
+    const { comments, getComments, addNewPostComment } = useComments();
+
 
     console.log('Perkraunamas Data.jsx:', page, posts);
 
@@ -23,7 +25,8 @@ export const Data = ({ children }) => {
             posts,
             comments, 
             getComments,
-            dispachPosts
+            dispachPosts,
+            addNewPostComment
         }}>
             {children}
             {console.log('Renderinamas DATA su posts:', posts)}
