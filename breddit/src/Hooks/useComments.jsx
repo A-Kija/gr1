@@ -14,6 +14,40 @@ export default function useComments() {
     ];
     */
 
+    const upVoteComment = (comId, user) => {
+        console.log('UPPPP');
+        if (user.role === 'guest') {
+            return;
+        }
+
+        setComments(coms => {
+
+            const { likes } = coms.find(c => c.id === comId);
+
+            const l = new Set(likes.l);
+            const d = new Set(likes.d);
+            const id = user.id;
+
+            d.delete(id);
+            if (l.has(id)) {
+                l.delete(id);
+            } else {
+                l.add(id);
+            }
+            const newLikes = {};
+            newLikes.l = [...l];
+            newLikes.d = [...d];
+
+            return coms.map(c => c.id === comId ? {...c, likes: newLikes} : c);
+
+        });
+    }
+
+    const downVoteComment = (id, user) => {
+        console.log('DOWNNNNN');
+    }
+
+
     const addNewPostComment = async (postId, commentText, user) => {
         setComments(c => [...c, {
             id: uuidv4(),
@@ -21,7 +55,7 @@ export default function useComments() {
             comId: null,
             body: commentText,
             author: user.name,
-            likes:{l:[],d:[]}
+            likes: { l: [], d: [] }
         }]);
         try {
             await axios.post(serverUrl + 'create-comment/' + postId + '/post', {
@@ -29,7 +63,7 @@ export default function useComments() {
                 content: commentText
             });
 
-        }catch (error) {
+        } catch (error) {
             console.error(error);
         }
     }
@@ -42,12 +76,12 @@ export default function useComments() {
             setComments(comments => {
                 const c = structuredClone(comments);
                 response.data.forEach(res => {
-                   const copy = c.find(c => c.id === res.id);
-                   if (copy) {
-                       copy.body = res.body;
-                   } else {
-                       c.push(res);
-                   }
+                    const copy = c.find(c => c.id === res.id);
+                    if (copy) {
+                        copy.body = res.body;
+                    } else {
+                        c.push(res);
+                    }
                 });
                 return c;
             });
@@ -55,6 +89,6 @@ export default function useComments() {
             console.error(error);
         }
     }
-      
-    return { comments, getComments, addNewPostComment };
+
+    return { comments, getComments, addNewPostComment, upVoteComment, downVoteComment };
 }

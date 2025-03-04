@@ -22,6 +22,10 @@ export default function ListPost({ post }) {
         console.log('add');
         addNewPostComment(post.id, postCom, user);
         setPostCom('');
+        dispachPosts({
+            type: C.ADD_1_COMMENT,
+            postId: post.id,
+        });
     }
 
     useEffect(_ => {

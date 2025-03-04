@@ -61,6 +61,10 @@ export default function postsReducer(state, action) {
                 break;
             }
 
+            case A.ADD_1_COMMENT:
+                newState = newState.map(p => p.id === action.postId ? {...p, comments: p.comments + 1} : p);
+                break;
+
         default:
             break;
     }

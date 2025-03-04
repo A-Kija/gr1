@@ -4,3 +4,5 @@ export const LOAD_ALL_POSTS = 'LOAD_ALL_POSTS'; // parsiuncia visus postus iš s
 export const UPVOTE_POST = 'UPVOTE_POST';
 
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
+
+export const ADD_1_COMMENT = 'ADD_1_COMMENT';

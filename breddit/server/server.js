@@ -249,8 +249,50 @@ app.patch(url + ':postId/update-votes', (req, res) => {
         })
     })
 
-    
 
+
+});
+
+app.post(url + 'create-comment/:id/:type', (req, res) => {
+
+    const id = req.params.id || 0;
+    const type = req.params.type;
+    const postId = type === 'post' ? id : null;
+    const commentId = type === 'com' ? id : null;
+    const { content, author_id } = req.body;
+    const likes = JSON.stringify({l:[],d:[]});
+
+    const sql = `
+        INSERT INTO comments
+        (post_id, comment_id, content, author_id, likes)
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    con.query(sql, [postId, commentId, content, author_id, likes], (err) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({
+                msg: 'Viskas blogai'
+            });
+        }
+
+        const sql = `
+            UPDATE posts
+            SET comments = comments + 1
+            WHERE id = ?
+        `;
+        con.query(sql, [id], (err) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: 'Viskas blogai'
+                });
+            }
+            res.status(201).json({
+                msg: 'Viskas gerai'
+            });
+        });
+    });
 });
 
 
