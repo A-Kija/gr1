@@ -1,20 +1,44 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import DataContext from '../Contexts/Data';
 import AuthContext from '../Contexts/Auth';
 
 export default function ListComment({ comment }) {
 
-    const {comments, getComments, upVoteComment, downVoteComment} = useContext(DataContext);
+    const { comments, getComments, upVoteComment, downVoteComment, addNewCommentComment } = useContext(DataContext);
 
     const { user } = useContext(AuthContext);
 
+    const [showReply, setShowReply] = useState(false);
+    const [commentsComent, setCommentsComent] = useState('');
+
+    const vote = useRef(false);
+
     const upVote = _ => {
+        vote.current = true;
         upVoteComment(comment.id, user);
     }
 
     const downVote = _ => {
+        vote.current = true;
         downVoteComment(comment.id, user);
     }
+
+    const addComment = _ => {
+        addNewCommentComment(comment.id, commentsComent, user);
+        setCommentsComent('');
+        setShowReply(false);
+    }
+
+    useEffect(_ => {
+
+        if (!vote.current) {
+            return;
+        }
+        vote.current = false;
+
+        console.log('pasikeite', comment.id);
+
+    }, [comment]);
 
     return (
         <div className="comment">
@@ -28,9 +52,22 @@ export default function ListComment({ comment }) {
                     {comment.likes.l.length - comment.likes.d.length}
                     <i className="down" onClick={downVote}>⇩</i>
                 </span>
-                <span className="comment" onClick={_=> getComments(comment.id, 'comment')}>Show comments</span>
-                <span className="comment">Reply</span>
+                <span className="comment" onClick={_ => getComments(comment.id, 'comment')}>Show comments</span>
+                <span className="comment" onClick={_ => setShowReply(r => !r)}>{showReply ? 'Hide reply' : 'Reply'}</span>
             </div>
+
+            {
+
+                showReply &&
+
+                <div className="write-comment">
+                    <div>Write comment</div>
+                    <textarea value={commentsComent} onChange={e => setCommentsComent(e.target.value)} />
+                    <button className="blue" onClick={addComment}>send</button>
+                </div>
+
+            }
+
             <div className="more-comments">
                 {
                     comments

@@ -39,7 +39,7 @@ export default function ListPost({ post }) {
 
         console.log('pakito', post.id);
 
-    }, [post])
+    }, [post]);
 
     const upVote = _ => {
         vote.current = true;

@@ -14,8 +14,7 @@ export default function useComments() {
     ];
     */
 
-    const upVoteComment = (comId, user) => {
-        console.log('UPPPP');
+    const upVoteComment = async (comId, user) => {
         if (user.role === 'guest') {
             return;
         }
@@ -38,13 +37,58 @@ export default function useComments() {
             newLikes.l = [...l];
             newLikes.d = [...d];
 
-            return coms.map(c => c.id === comId ? {...c, likes: newLikes} : c);
+            return coms.map(c => c.id === comId ? { ...c, likes: newLikes } : c);
 
         });
     }
 
-    const downVoteComment = (id, user) => {
-        console.log('DOWNNNNN');
+    const downVoteComment = (comId, user) => {
+        if (user.role === 'guest') {
+            return;
+        }
+
+        setComments(coms => {
+
+            const { likes } = coms.find(c => c.id === comId);
+
+            const l = new Set(likes.l);
+            const d = new Set(likes.d);
+            const id = user.id;
+
+            l.delete(id);
+            if (d.has(id)) {
+                d.delete(id);
+            } else {
+                d.add(id);
+            }
+
+            const newLikes = {};
+            newLikes.l = [...l];
+            newLikes.d = [...d];
+
+            return coms.map(c => c.id === comId ? { ...c, likes: newLikes } : c);
+
+        });
+    }
+
+    const addNewCommentComment = async (comId, commentText, user) => {
+        setComments(c => [{
+            id: uuidv4(),
+            comId,
+            postId: null,
+            body: commentText,
+            author: user.name,
+            likes: { l: [], d: [] }
+        }, ...c]);
+        // try {
+        //     await axios.post(serverUrl + 'create-comment/' + postId + '/post', {
+        //         author_id: user.id,
+        //         content: commentText
+        //     });
+
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
 
@@ -90,5 +134,5 @@ export default function useComments() {
         }
     }
 
-    return { comments, getComments, addNewPostComment, upVoteComment, downVoteComment };
+    return { comments, getComments, addNewPostComment, upVoteComment, downVoteComment, addNewCommentComment };
 }
