@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { serverUrl } from '../Constants/main';
 import axios from 'axios';
 
-export default function useVote(postId) {
+export default function useVote(id, type) {
 
     const [likes, setLikes] = useState(null);
 
@@ -12,7 +12,7 @@ export default function useVote(postId) {
             return;
         }
 
-        axios.patch(serverUrl + postId + '/update-votes', likes, { withCredentials: true })
+        axios.patch(serverUrl + id + '/update-votes/' + type, likes, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
             })

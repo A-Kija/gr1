@@ -62,6 +62,9 @@ app.get(url + 'posts', (req, res) => {
     }, 2000);
 });
 
+
+
+
 app.get(url + 'comments/:id/:type', (req, res) => {
     setTimeout(_ => {
         const id = req.params.id;
@@ -74,13 +77,15 @@ app.get(url + 'comments/:id/:type', (req, res) => {
             FROM comments AS c
             INNER JOIN authors AS a
             ON c.author_id = a.id
-        `;
+         `;
 
         if (type === 'post') {
             sql += `WHERE c.post_id = ?`;
         } else if (type === 'comment') {
             sql += `WHERE c.comment_id = ?`;
         }
+
+        sql += 'ORDER BY c.id DESC';
 
         con.query(sql, [id], (err, result) => {
             if (err) {
@@ -225,20 +230,30 @@ app.post(url + 'logout', (req, res) => {
 
 });
 
-app.patch(url + ':postId/update-votes', (req, res) => {
+app.patch(url + ':id/update-votes/:type', (req, res) => {
 
-    const { postId } = req.params;
+    const { id, type } = req.params;
     const likes = JSON.stringify(req.body);
 
-    console.log(postId, likes);
+    let sql;
 
-    const sql = `
-        UPDATE posts
-        SET likes = ?
-        WHERE id = ?
-    `;
+    if (type === 'post') {
+        sql = `
+            UPDATE posts
+            SET likes = ?
+            WHERE id = ?
+        `;
+    }
 
-    con.query(sql, [likes, postId], (err) => {
+    if (type === 'com') {
+        sql = `
+            UPDATE comments
+            SET likes = ?
+            WHERE id = ?
+        `;
+    }
+
+    con.query(sql, [likes, id], (err) => {
         if (err) {
             res.status(500).json({
                 message: 'Viskas blogai'

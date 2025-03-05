@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import DataContext from '../Contexts/Data';
 import AuthContext from '../Contexts/Auth';
+import useVote from '../Hooks/useVote';
 
 export default function ListComment({ comment }) {
 
@@ -11,7 +12,13 @@ export default function ListComment({ comment }) {
     const [showReply, setShowReply] = useState(false);
     const [commentsComent, setCommentsComent] = useState('');
 
+    const { setLikes } = useVote(comment.id, 'com');
+
     const vote = useRef(false);
+
+    const isDynamicId = parseInt(comment.id) !== comment.id;
+
+
 
     const upVote = _ => {
         vote.current = true;
@@ -36,7 +43,7 @@ export default function ListComment({ comment }) {
         }
         vote.current = false;
 
-        console.log('pasikeite', comment.id);
+        setLikes(comment.likes);
 
     }, [comment]);
 
@@ -53,7 +60,9 @@ export default function ListComment({ comment }) {
                     <i className="down" onClick={downVote}>⇩</i>
                 </span>
                 <span className="comment" onClick={_ => getComments(comment.id, 'comment')}>Show comments</span>
-                <span className="comment" onClick={_ => setShowReply(r => !r)}>{showReply ? 'Hide reply' : 'Reply'}</span>
+                {
+                    !isDynamicId && <span className="comment" onClick={_ => setShowReply(r => !r)}>{showReply ? 'Hide reply' : 'Reply'}</span>
+                }
             </div>
 
             {

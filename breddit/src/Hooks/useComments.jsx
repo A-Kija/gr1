@@ -80,15 +80,15 @@ export default function useComments() {
             author: user.name,
             likes: { l: [], d: [] }
         }, ...c]);
-        // try {
-        //     await axios.post(serverUrl + 'create-comment/' + postId + '/post', {
-        //         author_id: user.id,
-        //         content: commentText
-        //     });
+        try {
+            await axios.post(serverUrl + 'create-comment/' + comId + '/com', {
+                author_id: user.id,
+                content: commentText
+            });
 
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 

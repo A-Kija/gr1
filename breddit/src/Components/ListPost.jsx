@@ -14,7 +14,7 @@ export default function ListPost({ post }) {
 
     const [postCom, setPostCom] = useState('');
 
-    const { setLikes } = useVote(post.id);
+    const { setLikes } = useVote(post.id, 'post');
 
     const vote = useRef(false);
 
