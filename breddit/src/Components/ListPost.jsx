@@ -5,6 +5,13 @@ import AuthContext from '../Contexts/Auth';
 import * as C from '../Constants/actions';
 import useVote from '../Hooks/useVote';
 
+const smiles = [
+    { text: ':)', code: '🙂' },
+    { text: ':D', code: '😀' },
+    { text: ';)', code: '😉' },
+    { text: ':/', code: '🫤' }
+];
+
 
 export default function ListPost({ post }) {
 
@@ -18,9 +25,25 @@ export default function ListPost({ post }) {
 
     const vote = useRef(false);
 
+    const commentHandler = e => {
+        let com = e.target.value;
+        smiles.forEach(s => {
+            if (com.includes(s.text)) {
+                com = com.replace(s.text, s.code);
+            }
+        });
+        setPostCom(com);
+    }
+
     const addPostComment = _ => {
         console.log('add');
-        addNewPostComment(post.id, postCom, user);
+        let com = postCom;
+        smiles.forEach(s => {
+            if (com.includes(s.code)) {
+                com = com.replace(s.code, s.text);
+            }
+        });
+        addNewPostComment(post.id, com, user);
         setPostCom('');
         dispachPosts({
             type: C.ADD_1_COMMENT,
@@ -93,7 +116,7 @@ export default function ListPost({ post }) {
 
                     <div className="write-comment">
                         <div>Write comment</div>
-                        <textarea onChange={e => setPostCom(e.target.value)} value={postCom} />
+                        <textarea onChange={commentHandler} value={postCom} />
                         <button className="blue" onClick={addPostComment}>send</button>
                     </div>
 

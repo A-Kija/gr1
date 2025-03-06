@@ -283,6 +283,7 @@ app.post(url + 'create-comment/:id/:type', (req, res) => {
         VALUES (?, ?, ?, ?, ?)
     `;
 
+    
     con.query(sql, [postId, commentId, content, author_id, likes], (err) => {
         if (err) {
             console.log(err);

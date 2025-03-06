@@ -3,6 +3,14 @@ import DataContext from '../Contexts/Data';
 import AuthContext from '../Contexts/Auth';
 import useVote from '../Hooks/useVote';
 
+
+const smiles = [
+    { text: ':)', code: '🙂' },
+    { text: ':D', code: '😀' },
+    { text: ';)', code: '😉' },
+    { text: ':/', code: '🫤' }
+];
+
 export default function ListComment({ comment }) {
 
     const { comments, getComments, upVoteComment, downVoteComment, addNewCommentComment } = useContext(DataContext);
@@ -19,6 +27,26 @@ export default function ListComment({ comment }) {
     const isDynamicId = parseInt(comment.id) !== comment.id;
 
 
+    const commentHandler = e => {
+        let com = e.target.value;
+        smiles.forEach(s => {
+            if (com.includes(s.text)) {
+                com = com.replace(s.text, s.code);
+            }
+        });
+        setCommentsComent(com);
+        
+    }
+
+    const parseComment = com => {
+        smiles.forEach(s => {
+            if (com.includes(s.text)) {
+                com = com.replace(s.text, s.code);
+            }
+        });
+        // return com;
+        return com.split('\n').map((line, i) => <p key={i}>{line}</p>)
+    }
 
     const upVote = _ => {
         vote.current = true;
@@ -51,7 +79,7 @@ export default function ListComment({ comment }) {
         <div className="comment">
             <h3>{comment.author}</h3>
             {
-                comment.body.split('\n').map((line, i) => <p key={i}>{line}</p>)
+                parseComment(comment.body)
             }
             <div className="comment-bottom">
                 <span className="likes">
@@ -71,7 +99,7 @@ export default function ListComment({ comment }) {
 
                 <div className="write-comment">
                     <div>Write comment</div>
-                    <textarea value={commentsComent} onChange={e => setCommentsComent(e.target.value)} />
+                    <textarea value={commentsComent} onChange={commentHandler} />
                     <button className="blue" onClick={addComment}>send</button>
                 </div>
 
